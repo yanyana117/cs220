@@ -1,0 +1,1 @@
+sim/ — RTL verification (VCS). Reproduce: ../README.md (submit) and midterm report. Team-only notes: ../TEAM_PRIVATE_PHASE_NOTES.md (do not zip for course).

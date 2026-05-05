@@ -1,0 +1,1 @@
+sw/ — Optional software golden / trace generators. N/A unless report states otherwise.

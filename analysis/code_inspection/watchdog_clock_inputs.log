@@ -1,0 +1,5 @@
+90:input               aclk;           // ACLK
+91:input               aclk_en;        // ACLK enable
+93:input               mclk;           // Main system clock
+102:input               smclk;          // SMCLK
+103:input               smclk_en;       // SMCLK enable

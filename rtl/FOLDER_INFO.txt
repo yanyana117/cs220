@@ -1,0 +1,1 @@
+rtl/ — Baseline synthesizable Verilog (openMSP430). Source commit documented in the midterm report.

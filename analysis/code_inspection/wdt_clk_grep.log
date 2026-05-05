@@ -1,0 +1,16 @@
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:237:wire wdt_clk;
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:241:   .clk_out   (wdt_clk),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:250:     assign wdt_clk      = aclk;
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:254:     assign wdt_clk      = smclk;
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:267:    .clk          (wdt_clk),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:295:    .clk       (wdt_clk),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:301:always @ (posedge wdt_clk or posedge wdt_rst)
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:316:    .clk       (wdt_clk),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:329:wire       wdt_clk_cnt;
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:330:omsp_clock_gate clock_gate_wdtcnt (.gclk(wdt_clk_cnt),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:331:                                   .clk (wdt_clk), .enable(wdtcnt_en), .scan_enable(scan_enable));
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:333:wire       wdt_clk_cnt = wdt_clk;
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:336:always @ (posedge wdt_clk_cnt or posedge wdt_rst)
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:354:always @ (posedge wdt_clk_cnt or posedge wdt_rst)
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:388:always @ (posedge wdt_clk_cnt or posedge wdt_rst)
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:422:always @ (posedge wdt_clk_cnt or posedge wdt_rst)

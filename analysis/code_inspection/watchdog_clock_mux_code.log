@@ -1,0 +1,36 @@
+// Watchdog clock source selection
+//---------------------------------
+wire wdt_clk;
+
+`ifdef WATCHDOG_MUX
+omsp_clock_mux clock_mux_watchdog (
+   .clk_out   (wdt_clk),
+   .clk_in0   (smclk),
+   .clk_in1   (aclk),
+   .reset     (puc_rst),
+   .scan_mode (scan_mode),
+   .select_in (wdtctl[2])
+);
+`else
+  `ifdef WATCHDOG_NOMUX_ACLK
+     assign wdt_clk      = aclk;
+     wire   UNUSED_smclk = smclk;
+  `else
+     wire   UNUSED_aclk  = aclk;
+     assign wdt_clk      = smclk;
+  `endif
+`endif
+
+// Reset synchronizer for the watchdog local clock domain
+//--------------------------------------------------------
+
+wire wdt_rst_noscan;
+wire wdt_rst;
+
+// Reset Synchronizer
+omsp_sync_reset sync_reset_por (
+    .rst_s        (wdt_rst_noscan),
+    .clk          (wdt_clk),
+    .rst_a        (puc_rst)
+);
+

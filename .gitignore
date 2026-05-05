@@ -1,0 +1,20 @@
+# Synthesis / gate-level (regenerate on lab machine)
+syn/netlist.v
+syn/netlist.sdf
+syn/*.svf
+syn/syn.log
+syn/reports/
+syn/command.log
+sim/compile_netlist.log
+syn filenames.log
+syn default.svf
+
+# VCS
+sim/simv
+sim/simv.daidir/
+sim/simv_netlist
+sim/simv_netlist.daidir/
+sim/csrc/
+sim/ucli.key
+sim/*.vpd
+sim/DVEfiles/

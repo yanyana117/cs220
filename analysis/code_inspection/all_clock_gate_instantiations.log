@@ -1,0 +1,38 @@
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_clock_gate.v:30:// *File Name: omsp_clock_gate.v
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_clock_gate.v:44:module  omsp_clock_gate (
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_clock_gate.v:84:endmodule // omsp_clock_gate
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_clock_module.v:788:omsp_clock_gate clock_gate_mclk (
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_clock_module.v:795:omsp_clock_gate clock_gate_dma_mclk (
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_clock_module.v:916:   omsp_clock_gate clock_gate_aclk (
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_clock_module.v:1111:   omsp_clock_gate clock_gate_smclk (
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_clock_module.v:1183:  omsp_clock_gate clock_gate_dbg_clk (
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_clock_mux.v:200:endmodule // omsp_clock_gate
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_execution_unit.v:358:omsp_clock_gate clock_gate_mdb_out_nxt (.gclk(mclk_mdb_out_nxt),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_execution_unit.v:401:omsp_clock_gate clock_gate_mdb_in_buf (.gclk(mclk_mdb_in_buf),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_frontend.v:311:omsp_clock_gate clock_gate_irq_num (.gclk(mclk_irq_num),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_frontend.v:420:omsp_clock_gate clock_gate_pc (.gclk(mclk_pc),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_frontend.v:468:omsp_clock_gate clock_gate_inst_sext (.gclk(mclk_inst_sext),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_frontend.v:495:omsp_clock_gate clock_gate_inst_dext (.gclk(mclk_inst_dext),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_frontend.v:520:omsp_clock_gate clock_gate_decode (.gclk(mclk_decode),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_mem_backbone.v:327:omsp_clock_gate clock_gate_bckup (.gclk(mclk_bckup_gated),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_multiplier.v:165:omsp_clock_gate clock_gate_op1 (.gclk(mclk_op1),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_multiplier.v:191:omsp_clock_gate clock_gate_op2 (.gclk(mclk_op2),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_multiplier.v:218:omsp_clock_gate clock_gate_reslo (.gclk(mclk_reslo),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_multiplier.v:247:omsp_clock_gate clock_gate_reshi (.gclk(mclk_reshi),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_register_file.v:155:omsp_clock_gate clock_gate_r1 (.gclk(mclk_r1),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_register_file.v:193:omsp_clock_gate clock_gate_r2 (.gclk(mclk_r2),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_register_file.v:269:omsp_clock_gate clock_gate_r3 (.gclk(mclk_r3),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_register_file.v:297:omsp_clock_gate clock_gate_r4 (.gclk(mclk_r4),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_register_file.v:321:omsp_clock_gate clock_gate_r5 (.gclk(mclk_r5),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_register_file.v:345:omsp_clock_gate clock_gate_r6 (.gclk(mclk_r6),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_register_file.v:369:omsp_clock_gate clock_gate_r7 (.gclk(mclk_r7),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_register_file.v:393:omsp_clock_gate clock_gate_r8 (.gclk(mclk_r8),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_register_file.v:417:omsp_clock_gate clock_gate_r9 (.gclk(mclk_r9),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_register_file.v:441:omsp_clock_gate clock_gate_r10 (.gclk(mclk_r10),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_register_file.v:465:omsp_clock_gate clock_gate_r11 (.gclk(mclk_r11),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_register_file.v:489:omsp_clock_gate clock_gate_r12 (.gclk(mclk_r12),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_register_file.v:513:omsp_clock_gate clock_gate_r13 (.gclk(mclk_r13),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_register_file.v:537:omsp_clock_gate clock_gate_r14 (.gclk(mclk_r14),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_register_file.v:561:omsp_clock_gate clock_gate_r15 (.gclk(mclk_r15),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:167:omsp_clock_gate clock_gate_wdtctl (.gclk(mclk_wdtctl),
+/home/cegrad/xhuan230/cs220/midterm-team-5/rtl/omsp_watchdog.v:330:omsp_clock_gate clock_gate_wdtcnt (.gclk(wdt_clk_cnt),

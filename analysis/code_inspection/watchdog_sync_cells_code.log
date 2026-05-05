@@ -1,0 +1,41 @@
+// Synchronization
+wire wdtcnt_clr_sync;
+omsp_sync_cell sync_cell_wdtcnt_clr (
+    .data_out  (wdtcnt_clr_sync),
+    .data_in   (wdtcnt_clr_toggle),
+    .clk       (wdt_clk),
+    .rst       (wdt_rst)
+);
+
+// Edge detection
+reg wdtcnt_clr_sync_dly;
+always @ (posedge wdt_clk or posedge wdt_rst)
+  if (wdt_rst)  wdtcnt_clr_sync_dly <= 1'b0;
+  else          wdtcnt_clr_sync_dly <= wdtcnt_clr_sync;
+
+wire wdtqn_edge;
+wire wdtcnt_clr = (wdtcnt_clr_sync ^ wdtcnt_clr_sync_dly) | wdtqn_edge;
+
+
+// Watchog counter increment (synchronization)
+//----------------------------------------------
+wire wdtcnt_incr;
+
+omsp_sync_cell sync_cell_wdtcnt_incr (
+    .data_out  (wdtcnt_incr),
+    .data_in   (~wdtctl[7] & ~dbg_freeze),
+    .clk       (wdt_clk),
+    .rst       (wdt_rst)
+);
+
+
+// Watchdog 16 bit counter
+//--------------------------
+reg  [15:0] wdtcnt;
+
+wire [15:0] wdtcnt_nxt  = wdtcnt+16'h0001;
+
+`ifdef CLOCK_GATING
+wire       wdtcnt_en   = wdtcnt_clr | wdtcnt_incr;
+wire       wdt_clk_cnt;
+omsp_clock_gate clock_gate_wdtcnt (.gclk(wdt_clk_cnt),

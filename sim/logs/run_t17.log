@@ -1,0 +1,8 @@
+Chronologic VCS simulator copyright 1991-2024
+Contains Synopsys proprietary information.
+Compiler version W-2024.09-SP2-5_Full64; Runtime version W-2024.09-SP2-5_Full64;  May  4 01:00 2026
+TB: TEST_ID=17 (program memory loaded)
+TB: corner NMI pulse (TEST_ID=17)
+TB_OPENMSP430_MINIMAL: PASS (TEST_ID=17, 50000 mclk cycles, gate-level)
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 2499975000 ps

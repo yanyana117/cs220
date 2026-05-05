@@ -1,0 +1,1 @@
+syn/ — Design Compiler scripts and synthesis outputs (netlist.v, netlist.sdf, reports/). Run: dc_shell -f run_syn.tcl | tee syn.log (set SAED32_HOME per course setup).
