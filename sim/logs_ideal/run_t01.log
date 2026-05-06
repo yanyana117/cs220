@@ -1,8 +1,8 @@
 Chronologic VCS simulator copyright 1991-2024
 Contains Synopsys proprietary information.
-Compiler version W-2024.09-SP2-5_Full64; Runtime version W-2024.09-SP2-5_Full64;  May  4 01:00 2026
+Compiler version W-2024.09-SP2-5_Full64; Runtime version W-2024.09-SP2-5_Full64;  May  5 21:24 2026
 TB: TEST_ID=1 (program memory loaded)
 TB: constrained-random IRQ0 pulse (TEST_ID=1, delay_cycles=902)
-TB_OPENMSP430_MINIMAL: PASS (TEST_ID=1, 50000 mclk cycles, gate-level)
+TB_OPENMSP430_MINIMAL: PASS (TEST_ID=1, 50000 mclk cycles, wdtctl=0x80 reslo=0x0165)
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 2499975000 ps
