@@ -4,14 +4,16 @@ Baseline: **openMSP430** (trimmed top-level for course scope). This archive foll
 
 ## Directory layout
 
-| Directory | Contents |
-|-----------|----------|
-| `rtl/` | Synthesizable Verilog RTL and `openMSP430_defines.v`. |
-| `sim/` | Simulation file list (`rtl_files.f`), testbench, memory images, `Makefile`, logs (`compile.log`, `run.log`). |
-| `syn/` | Synthesis scripts and reports (when run). |
-| `ptpx/` | PrimeTime PX scripts and power reports (when run). |
-| `sw/` | Optional software golden / trace tools; N/A unless stated in the report. |
-| `openmsp430_src/` | Upstream reference clone; baseline **commit hash** is recorded in the **Midterm Report** (Baseline RTL). |
+
+| Directory         | Contents                                                                                                     |
+| ----------------- | ------------------------------------------------------------------------------------------------------------ |
+| `rtl/`            | Synthesizable Verilog RTL and `openMSP430_defines.v`.                                                        |
+| `sim/`            | Simulation file list (`rtl_files.f`), testbench, memory images, `Makefile`, logs (`compile.log`, `run.log`). |
+| `syn/`            | Synthesis scripts and reports (when run).                                                                    |
+| `ptpx/`           | PrimeTime PX scripts and power reports (when run).                                                           |
+| `sw/`             | Optional software golden / trace tools; N/A unless stated in the report.                                     |
+| `openmsp430_src/` | Upstream reference clone; baseline **commit hash** is recorded in the **Midterm Report** (Baseline RTL).     |
+
 
 Each subdirectory may contain a one-line `FOLDER_INFO.txt` describing intent.
 
@@ -68,13 +70,15 @@ This runs `scripts/gen_phaseb_pmem.py` (refreshes `pmem.mem`, `pmem_t00.mem` …
 
 ### Verification testcase map (ideal sim)
 
-| Label | `+TEST_ID` | Program image | Intent |
-|-------|------------|---------------|--------|
-| R0 | 0 | `pmem.mem` | Deterministic WDT hold + small MPY |
-| R1–R9 | 1–9 | `pmem_t01.mem` … `pmem_t09.mem` | Seeded varying operands / NOP padding |
-| C0–C9 | 10–19 | `pmem_t10.mem` … `pmem_t19.mem` | Corner-style WDT/MPY ordering and operands |
-| | | | |
-| | | | *Log path pattern:* `sim/logs/run_tNN.log` (`NN` = two-digit `TEST_ID`). |
+
+| Label | `+TEST_ID` | Program image                   | Intent                                                                   |
+| ----- | ---------- | ------------------------------- | ------------------------------------------------------------------------ |
+| R0    | 0          | `pmem.mem`                      | Deterministic WDT hold + small MPY                                       |
+| R1–R9 | 1–9        | `pmem_t01.mem` … `pmem_t09.mem` | Seeded varying operands / NOP padding                                    |
+| C0–C9 | 10–19      | `pmem_t10.mem` … `pmem_t19.mem` | Corner-style WDT/MPY ordering and operands                               |
+|       |            |                                 |                                                                          |
+|       |            |                                 | *Log path pattern:* `sim/logs/run_tNN.log` (`NN` = two-digit `TEST_ID`). |
+
 
 **TB features (Verification code, Midterm.pdf):**
 
@@ -112,7 +116,7 @@ export SAED32_HOME=/path/to/SAED32_EDK   # example; use your lab path
 dc_shell -f run_syn.tcl | tee syn.log
 ```
 
-Outputs (gitignored by default): `netlist.v`, `netlist.sdf`, `constraints.sdc`, `reports/*.rpt`. Then run **`make run-phaseb-netlist`** from `sim/`.
+Outputs (gitignored by default): `netlist.v`, `netlist.sdf`, `constraints.sdc`, `reports/*.rpt`. Then run `**make run-phaseb-netlist**` from `sim/`.
 
 ## Reproduce — PrimeTime PX
 
