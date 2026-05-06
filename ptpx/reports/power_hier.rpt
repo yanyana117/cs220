@@ -1,0 +1,108 @@
+****************************************
+Report : Averaged Power
+	-hierarchy
+	-levels 3
+Design : openMSP430
+Version: V-2023.12-SP5-4
+Date   : Wed May  6 10:27:33 2026
+****************************************
+
+
+
+                                      Int      Switch   Leak     Total
+Hierarchy                             Power    Power    Power    Power    %
+----------------------------------------------------------------------------------
+openMSP430                            1.47e-05 1.43e-06 1.21e-03 1.23e-03 100.0
+  execution_unit_0/clk_gate_mdb_in_buf_reg (SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_1)
+                                      5.48e-08 8.96e-12 1.46e-07 2.01e-07   0.0
+  frontend_0/clk_gate_inst_sext_reg (SNPS_CLOCK_GATE_HIGH_omsp_frontend_1)
+                                      5.67e-08 5.23e-09 1.47e-07 2.09e-07   0.0
+  frontend_0/clk_gate_irq_num_reg (SNPS_CLOCK_GATE_HIGH_omsp_frontend_0)
+                                      5.48e-08 3.15e-13 1.46e-07 2.01e-07   0.0
+  mem_backbone_0/clk_gate_pmem_dout_bckup_reg (SNPS_CLOCK_GATE_HIGH_omsp_mem_backbone)
+                                      5.48e-08 1.41e-11 1.46e-07 2.01e-07   0.0
+  execution_unit_0/register_file_0/clk_gate_r2_reg (SNPS_CLOCK_GATE_HIGH_omsp_register_file_1)
+                                      5.48e-08 9.48e-13 1.46e-07 2.01e-07   0.0
+  execution_unit_0/register_file_0/clk_gate_r13_reg (SNPS_CLOCK_GATE_HIGH_omsp_register_file_12)
+                                      5.48e-08 1.28e-12 1.46e-07 2.01e-07   0.0
+  execution_unit_0/register_file_0/clk_gate_r8_reg (SNPS_CLOCK_GATE_HIGH_omsp_register_file_7)
+                                      5.48e-08 8.99e-12 1.46e-07 2.01e-07   0.0
+  clk_gate_execution_unit_0/register_file_0/r2_reg (SNPS_CLOCK_GATE_HIGH_openMSP430_0)
+                                      9.29e-08 1.52e-08 1.54e-07 2.62e-07   0.0
+  frontend_0/clk_gate_inst_type_reg (SNPS_CLOCK_GATE_HIGH_omsp_frontend_3)
+                                      9.62e-08 2.01e-07 1.54e-07 4.51e-07   0.0
+  multiplier_0/clk_gate_op2_reg (SNPS_CLOCK_GATE_HIGH_omsp_multiplier_1)
+                                      5.48e-08 3.86e-12 1.46e-07 2.01e-07   0.0
+  dbg_0/clk_gate_mem_ctl_reg (SNPS_CLOCK_GATE_HIGH_omsp_dbg_1)
+                                      5.48e-08 1.19e-13 1.46e-07 2.01e-07   0.0
+  dbg_0/dbg_uart_0/clk_gate_uart_state_reg (SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_0)
+                                      5.48e-08 1.19e-13 1.46e-07 2.01e-07   0.0
+  execution_unit_0/register_file_0/clk_gate_r1_reg (SNPS_CLOCK_GATE_HIGH_omsp_register_file_0)
+                                      5.48e-08 1.20e-12 1.46e-07 2.01e-07   0.0
+  execution_unit_0/register_file_0/clk_gate_r12_reg (SNPS_CLOCK_GATE_HIGH_omsp_register_file_11)
+                                      5.48e-08 1.28e-12 1.46e-07 2.01e-07   0.0
+  execution_unit_0/register_file_0/clk_gate_r7_reg (SNPS_CLOCK_GATE_HIGH_omsp_register_file_6)
+                                      5.48e-08 1.28e-12 1.46e-07 2.01e-07   0.0
+  clk_gate_frontend_0/pc_reg (SNPS_CLOCK_GATE_HIGH_openMSP430_4)
+                                      5.48e-08    0.000 1.46e-07 2.01e-07   0.0
+  clk_gate_dbg_0/mem_cnt_reg_0 (SNPS_CLOCK_GATE_HIGH_openMSP430_3)
+                                      5.48e-08    0.000 1.46e-07 2.01e-07   0.0
+  multiplier_0/clk_gate_op1_reg (SNPS_CLOCK_GATE_HIGH_omsp_multiplier_0)
+                                      5.48e-08 4.35e-12 1.46e-07 2.01e-07   0.0
+  execution_unit_0/clk_gate_mdb_out_nxt_reg (SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_0)
+                                      9.52e-08 6.67e-08 1.54e-07 3.16e-07   0.0
+  clock_module_0/clk_gate_smclk_div_reg (SNPS_CLOCK_GATE_HIGH_omsp_clock_module_3)
+                                      5.48e-08 2.20e-13 1.46e-07 2.01e-07   0.0
+  dbg_0/dbg_uart_0/clk_gate_xfer_buf_reg (SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_4)
+                                      5.48e-08 7.46e-13 1.46e-07 2.01e-07   0.0
+  execution_unit_0/register_file_0/clk_gate_r11_reg (SNPS_CLOCK_GATE_HIGH_omsp_register_file_10)
+                                      5.48e-08 1.29e-12 1.46e-07 2.01e-07   0.0
+  dbg_0/clk_gate_cpu_ctl_reg (SNPS_CLOCK_GATE_HIGH_omsp_dbg_0)
+                                      5.48e-08 1.48e-13 1.46e-07 2.01e-07   0.0
+  execution_unit_0/register_file_0/clk_gate_r6_reg (SNPS_CLOCK_GATE_HIGH_omsp_register_file_5)
+                                      5.48e-08 1.28e-12 1.46e-07 2.01e-07   0.0
+  watchdog_0/clk_gate_wdtcnt_reg (SNPS_CLOCK_GATE_HIGH_omsp_watchdog_1)
+                                      5.48e-08 2.69e-11 1.46e-07 2.01e-07   0.0
+  dbg_0/clk_gate_mem_data_reg (SNPS_CLOCK_GATE_HIGH_omsp_dbg_2)
+                                      5.48e-08 6.40e-13 1.46e-07 2.01e-07   0.0
+  dbg_0/dbg_uart_0/clk_gate_xfer_cnt_reg (SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_3)
+                                      5.48e-08 6.40e-13 1.46e-07 2.01e-07   0.0
+  clock_module_0/clk_gate_bcsctl2_reg (SNPS_CLOCK_GATE_HIGH_omsp_clock_module_1)
+                                      5.48e-08 2.37e-13 1.46e-07 2.01e-07   0.0
+  execution_unit_0/register_file_0/clk_gate_r10_reg (SNPS_CLOCK_GATE_HIGH_omsp_register_file_9)
+                                      5.48e-08 1.28e-12 1.46e-07 2.01e-07   0.0
+  execution_unit_0/register_file_0/clk_gate_r5_reg (SNPS_CLOCK_GATE_HIGH_omsp_register_file_4)
+                                      5.48e-08 1.28e-12 1.46e-07 2.01e-07   0.0
+  clock_module_0/clk_gate_bcsctl1_reg (SNPS_CLOCK_GATE_HIGH_omsp_clock_module_0)
+                                      5.48e-08 3.16e-13 1.46e-07 2.01e-07   0.0
+  frontend_0/clk_gate_inst_dext_reg (SNPS_CLOCK_GATE_HIGH_omsp_frontend_2)
+                                      5.48e-08 8.98e-12 1.46e-07 2.01e-07   0.0
+  clk_gate_dbg_0/mem_addr_reg (SNPS_CLOCK_GATE_HIGH_openMSP430_1)
+                                      5.48e-08 6.42e-13 1.46e-07 2.01e-07   0.0
+  dbg_0/dbg_uart_0/clk_gate_dbg_addr_reg (SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_5)
+                                      5.48e-08 2.77e-13 1.46e-07 2.01e-07   0.0
+  clk_gate_dbg_0/mem_cnt_reg (SNPS_CLOCK_GATE_HIGH_openMSP430_2)
+                                      5.48e-08    0.000 1.46e-07 2.01e-07   0.0
+  clock_module_0/clk_gate_aclk_div_reg (SNPS_CLOCK_GATE_HIGH_omsp_clock_module_2)
+                                      5.48e-08 2.37e-13 1.46e-07 2.01e-07   0.0
+  execution_unit_0/register_file_0/clk_gate_r4_reg (SNPS_CLOCK_GATE_HIGH_omsp_register_file_3)
+                                      5.48e-08 1.28e-12 1.46e-07 2.01e-07   0.0
+  execution_unit_0/register_file_0/clk_gate_r15_reg (SNPS_CLOCK_GATE_HIGH_omsp_register_file_14)
+                                      5.48e-08 1.29e-12 1.46e-07 2.01e-07   0.0
+  multiplier_0/clk_gate_reshi_reg (SNPS_CLOCK_GATE_HIGH_omsp_multiplier_3)
+                                      4.91e-08 9.01e-12 1.42e-07 1.92e-07   0.0
+  watchdog_0/clk_gate_wdtctl_reg (SNPS_CLOCK_GATE_HIGH_omsp_watchdog_0)
+                                      5.48e-08 1.42e-12 1.46e-07 2.01e-07   0.0
+  multiplier_0/clk_gate_reslo_reg (SNPS_CLOCK_GATE_HIGH_omsp_multiplier_2)
+                                      5.48e-08 8.99e-12 1.46e-07 2.01e-07   0.0
+  execution_unit_0/register_file_0/clk_gate_r3_reg (SNPS_CLOCK_GATE_HIGH_omsp_register_file_2)
+                                      5.67e-08 5.21e-09 1.47e-07 2.09e-07   0.0
+  execution_unit_0/register_file_0/clk_gate_r14_reg (SNPS_CLOCK_GATE_HIGH_omsp_register_file_13)
+                                      5.48e-08 1.28e-12 1.46e-07 2.01e-07   0.0
+  dbg_0/dbg_uart_0/clk_gate_xfer_bit_reg (SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_2)
+                                      5.48e-08 1.99e-13 1.46e-07 2.01e-07   0.0
+  dbg_0/dbg_uart_0/clk_gate_sync_cnt_reg (SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_1)
+                                      5.48e-08 7.62e-13 1.46e-07 2.01e-07   0.0
+  execution_unit_0/register_file_0/clk_gate_r9_reg (SNPS_CLOCK_GATE_HIGH_omsp_register_file_8)
+                                      5.48e-08 1.29e-12 1.46e-07 2.01e-07   0.0
+1

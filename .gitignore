@@ -3,13 +3,17 @@ syn/netlist.v
 syn/netlist.sdf
 syn/*.svf
 syn/syn.log
-syn/reports/
+syn/reports/timing.rpt
+syn/reports/area.rpt
+syn/reports/power.rpt
 syn/command.log
+syn/filenames.log
+syn/default.svf
+syn/WORK/
+syn/alib-52/
 sim/compile_netlist.log
-syn filenames.log
-syn default.svf
 
-# VCS
+# VCS / DC / PT build & temp
 sim/simv
 sim/simv.daidir/
 sim/simv_netlist
@@ -18,3 +22,11 @@ sim/csrc/
 sim/ucli.key
 sim/*.vpd
 sim/DVEfiles/
+sim/inter.vpd
+sim/*.vcd
+sim/*.fsdb
+
+# PrimeTime temp
+ptpx/.rce/
+ptpx/pt_shell_command.log
+ptpx/ptpx_dryrun.log

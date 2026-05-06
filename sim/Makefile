@@ -35,9 +35,10 @@ gen-pmem:
 	python3 scripts/gen_phaseb_pmem.py
 
 # Ideal RTL: 20 tests, hierarchical WDT/MPY checks enabled
+# Logs go to logs_ideal/ to avoid clobbering netlist run logs.
 run-phaseb: gen-pmem compile
 	@chmod +x scripts/run_tests_now.sh 2>/dev/null || true
-	@bash scripts/run_tests_now.sh
+	@LOGDIR=logs_ideal bash scripts/run_tests_now.sh
 
 run-all-now: run-phaseb
 
@@ -51,12 +52,13 @@ compile-netlist:
 	  -o simv_netlist 2>&1 | tee compile_netlist.log
 
 # Netlist: same 20 runs; +PER_CHK_OFF avoids hierarchical regs if DC flattens or X on gated nodes
+# Logs go to logs_netlist/ to avoid clobbering ideal RTL run logs.
 run-phaseb-netlist: gen-pmem compile-netlist
 	@chmod +x scripts/run_tests_now.sh 2>/dev/null || true
-	@SIMV=./simv_netlist SIMV_EXTRA=+PER_CHK_OFF bash scripts/run_tests_now.sh
+	@SIMV=./simv_netlist SIMV_EXTRA=+PER_CHK_OFF LOGDIR=logs_netlist bash scripts/run_tests_now.sh
 
 run-phaseb-both: run-phaseb
 	@if [ -f ../syn/netlist.v ]; then $(MAKE) run-phaseb-netlist; else echo ">>> Netlist skipped (no ../syn/netlist.v). Synthesize first."; fi
 
 clean:
-	rm -rf simv simv.daidir simv_netlist simv_netlist.daidir csrc ucli.key vc_hdrs.h compile.log compile_netlist.log run.log DVEfiles inter.vpd $(LOGDIR)/*.log
+	rm -rf simv simv.daidir simv_netlist simv_netlist.daidir csrc ucli.key vc_hdrs.h compile.log compile_netlist.log run.log DVEfiles inter.vpd $(LOGDIR)/*.log logs_ideal/*.log logs_netlist/*.log

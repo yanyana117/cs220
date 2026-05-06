@@ -1,0 +1,120 @@
+ 
+****************************************
+Report : area
+Design : openMSP430
+Version: W-2024.09-SP5-4
+Date   : Tue May  5 23:35:29 2026
+****************************************
+
+Library(s) Used:
+
+    saed32hvt_ss0p75v125c (File: /usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_hvt/db_nldm/saed32hvt_ss0p75v125c.db)
+    saed32rvt_ss0p75v125c (File: /usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_rvt/db_nldm/saed32rvt_ss0p75v125c.db)
+    saed32lvt_ss0p75v125c (File: /usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_lvt/db_nldm/saed32lvt_ss0p75v125c.db)
+
+Number of ports:                          444
+Number of nets:                          7628
+Number of cells:                         7013
+Number of combinational cells:           6184
+Number of sequential cells:               730
+Number of macros/black boxes:               0
+Number of buf/inv:                       1592
+Number of references:                     186
+
+Combinational area:              13755.544172
+Buf/Inv area:                     2140.146640
+Noncombinational area:            5175.388499
+Macro/Black Box area:                0.000000
+Net Interconnect area:            4851.717248
+
+Total cell area:                 18930.932671
+Total area:                      23782.649918
+
+Hierarchical area distribution
+------------------------------
+
+                                  Global cell area            Local cell area
+                                  -------------------  ----------------------------- 
+Hierarchical cell                 Absolute    Percent  Combi-      Noncombi-  Black-
+                                  Total       Total    national    national   boxes   Design
+--------------------------------  ----------  -------  ----------  ---------  ------  ------------------------------------------
+openMSP430                        18930.9327    100.0  13755.5442  4906.5041  0.0000  openMSP430
+clk_gate_dbg_0/mem_addr_reg           5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_openMSP430_1
+clk_gate_dbg_0/mem_cnt_reg            5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_openMSP430_2
+clk_gate_dbg_0/mem_cnt_reg_0          5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_openMSP430_3
+clk_gate_execution_unit_0/register_file_0/r2_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_openMSP430_0
+clk_gate_frontend_0/pc_reg            5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_openMSP430_4
+clock_module_0/clk_gate_aclk_div_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_clock_module_2
+clock_module_0/clk_gate_bcsctl1_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_clock_module_0
+clock_module_0/clk_gate_bcsctl2_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_clock_module_1
+clock_module_0/clk_gate_smclk_div_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_clock_module_3
+dbg_0/clk_gate_cpu_ctl_reg            5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_dbg_0
+dbg_0/clk_gate_mem_ctl_reg            5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_dbg_1
+dbg_0/clk_gate_mem_data_reg           5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_dbg_2
+dbg_0/dbg_uart_0/clk_gate_dbg_addr_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_5
+dbg_0/dbg_uart_0/clk_gate_sync_cnt_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_1
+dbg_0/dbg_uart_0/clk_gate_uart_state_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_0
+dbg_0/dbg_uart_0/clk_gate_xfer_bit_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_2
+dbg_0/dbg_uart_0/clk_gate_xfer_buf_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_4
+dbg_0/dbg_uart_0/clk_gate_xfer_cnt_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_3
+execution_unit_0/clk_gate_mdb_in_buf_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_1
+execution_unit_0/clk_gate_mdb_out_nxt_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_0
+execution_unit_0/register_file_0/clk_gate_r10_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_register_file_9
+execution_unit_0/register_file_0/clk_gate_r11_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_register_file_10
+execution_unit_0/register_file_0/clk_gate_r12_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_register_file_11
+execution_unit_0/register_file_0/clk_gate_r13_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_register_file_12
+execution_unit_0/register_file_0/clk_gate_r14_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_register_file_13
+execution_unit_0/register_file_0/clk_gate_r15_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_register_file_14
+execution_unit_0/register_file_0/clk_gate_r1_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_register_file_0
+execution_unit_0/register_file_0/clk_gate_r2_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_register_file_1
+execution_unit_0/register_file_0/clk_gate_r3_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_register_file_2
+execution_unit_0/register_file_0/clk_gate_r4_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_register_file_3
+execution_unit_0/register_file_0/clk_gate_r5_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_register_file_4
+execution_unit_0/register_file_0/clk_gate_r6_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_register_file_5
+execution_unit_0/register_file_0/clk_gate_r7_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_register_file_6
+execution_unit_0/register_file_0/clk_gate_r8_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_register_file_7
+execution_unit_0/register_file_0/clk_gate_r9_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_register_file_8
+frontend_0/clk_gate_inst_dext_reg     5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_frontend_2
+frontend_0/clk_gate_inst_sext_reg     5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_frontend_1
+frontend_0/clk_gate_inst_type_reg     5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_frontend_3
+frontend_0/clk_gate_irq_num_reg       5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_frontend_0
+mem_backbone_0/clk_gate_pmem_dout_bckup_reg
+                                      5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_mem_backbone
+multiplier_0/clk_gate_op1_reg         5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_multiplier_0
+multiplier_0/clk_gate_op2_reg         5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_multiplier_1
+multiplier_0/clk_gate_reshi_reg       5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_multiplier_3
+multiplier_0/clk_gate_reslo_reg       5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_multiplier_2
+watchdog_0/clk_gate_wdtcnt_reg        5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_watchdog_1
+watchdog_0/clk_gate_wdtctl_reg        5.8453      0.0      0.0000     5.8453  0.0000  SNPS_CLOCK_GATE_HIGH_omsp_watchdog_0
+--------------------------------  ----------  -------  ----------  ---------  ------  ------------------------------------------
+Total                                                  13755.5442  5175.3885  0.0000
+
+1

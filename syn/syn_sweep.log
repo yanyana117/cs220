@@ -1,0 +1,1990 @@
+Info: [VCS_SAVE_RESTORE_INFO] ASLR (Address Space Layout Randomization) is detected on the machine. To enable $save functionality, ASLR will be switched off and simv re-executed.
+Please use '-no_save' simv switch to avoid this.
+
+                           Design Compiler Graphical 
+                                 DC Ultra (TM)
+                                  DFTMAX (TM)
+                              Power Compiler (TM)
+                                 DesignWare (R)
+                                 DC Expert (TM)
+                               Design Vision (TM)
+                               HDL Compiler (TM)
+                               VHDL Compiler (TM)
+                                  DFT Compiler
+                               Design Compiler(R)
+
+              Version W-2024.09-SP5-4 for linux64 - Sep 10, 2025 
+
+                    Copyright (c) 1988 - 2025 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+Initializing...
+Current time:       Tue May  5 23:25:54 2026
+Hostname:           bender.engr.ucr.edu
+CPU Model:          Intel(R) Xeon(R) Gold 5215 CPU @ 2.50GHz
+CPU Details:        Cores = 40 : Sockets = 2 : Cache Size = 14080 KB : Freq = 2.50 GHz
+OS:                 Linux 4.18.0-553.115.1.el8_10.x86_64
+RAM:                251 GB (Free 186 GB)
+Swap:                 3 GB (Free   3 GB)
+Work Filesystem:    /home/cegrad mounted to toaster:/home/grad/ce
+Tmp Filesystem:     / mounted to /dev/md127
+Work Disk:          6745 GB (Free 3806 GB)
+Tmp Disk:           888 GB (Free 224 GB)
+
+CPU Load: 38%, Ram Free: 186 GB, Swap Free: 3 GB, Work Disk Free: 3806 GB, Tmp Disk Free: 224 GB
+# syn/run_syn_sweep.tcl
+set search_path [list . ../rtl ../rtl/periph]
+. ../rtl ../rtl/periph
+if {[info exists env(SAED32_HOME)]} {
+  set saed $env(SAED32_HOME)
+  lappend search_path $saed $saed/lib
+  foreach corner {stdcell_rvt stdcell_lvt stdcell_hvt} {
+    set dbd [file join $saed lib $corner db_nldm]
+    if {[file isdirectory $dbd]} { lappend search_path $dbd }
+  }
+}
+set_app_var search_path $search_path
+. ../rtl ../rtl/periph /usr/local/synopsys/pdk/SAED32_EDK /usr/local/synopsys/pdk/SAED32_EDK/lib /usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_rvt/db_nldm /usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_lvt/db_nldm /usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_hvt/db_nldm
+set_app_var target_library "saed32rvt_ss0p75v125c.db saed32lvt_ss0p75v125c.db saed32hvt_ss0p75v125c.db"
+saed32rvt_ss0p75v125c.db saed32lvt_ss0p75v125c.db saed32hvt_ss0p75v125c.db
+set_app_var link_library "* $target_library"
+* saed32rvt_ss0p75v125c.db saed32lvt_ss0p75v125c.db saed32hvt_ss0p75v125c.db
+set hdlin_enable_hier_map true
+true
+define_design_lib WORK -path ./WORK
+1
+file mkdir reports
+# analyze/elaborate
+set rtl_files {}
+foreach f [glob -nocomplain ../rtl/*.v] {
+  set b [file tail $f]
+  if {$b eq "openMSP430_defines.v" || $b eq "openMSP430_undefines.v"} { continue }
+  lappend rtl_files $f
+}
+analyze -format verilog -library WORK $rtl_files
+Running PRESTO HDLC
+Compiling source file ../rtl/omsp_timerA.v
+Opening include file ../rtl/omsp_timerA_defines.v
+Opening include file ../rtl/omsp_timerA_undefines.v
+Opening include file ../rtl/omsp_timerA_undefines.v
+Compiling source file ../rtl/omsp_gpio.v
+Compiling source file ../rtl/omsp_timerA_undefines.v
+Compiling source file ../rtl/template_periph_16b.v
+Compiling source file ../rtl/omsp_timerA_defines.v
+Opening include file ../rtl/omsp_timerA_undefines.v
+Compiling source file ../rtl/template_periph_8b.v
+Compiling source file ../rtl/omsp_alu.v
+Opening include file ../rtl/openMSP430_defines.v
+Compiling source file ../rtl/omsp_and_gate.v
+Compiling source file ../rtl/omsp_clock_gate.v
+Compiling source file ../rtl/omsp_clock_module.v
+Compiling source file ../rtl/omsp_clock_mux.v
+Compiling source file ../rtl/omsp_dbg_hwbrk.v
+Compiling source file ../rtl/omsp_dbg_i2c.v
+Compiling source file ../rtl/omsp_dbg_uart.v
+Compiling source file ../rtl/omsp_dbg.v
+Compiling source file ../rtl/omsp_execution_unit.v
+Compiling source file ../rtl/omsp_frontend.v
+Compiling source file ../rtl/omsp_mem_backbone.v
+Compiling source file ../rtl/omsp_multiplier.v
+Compiling source file ../rtl/omsp_register_file.v
+Compiling source file ../rtl/omsp_scan_mux.v
+Compiling source file ../rtl/omsp_sfr.v
+Compiling source file ../rtl/omsp_sync_cell.v
+Compiling source file ../rtl/omsp_sync_reset.v
+Compiling source file ../rtl/omsp_wakeup_cell.v
+Compiling source file ../rtl/omsp_watchdog.v
+Compiling source file ../rtl/openMSP430.v
+Presto compilation completed successfully.
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_rvt/db_nldm/saed32rvt_ss0p75v125c.db'
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_lvt/db_nldm/saed32lvt_ss0p75v125c.db'
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_hvt/db_nldm/saed32hvt_ss0p75v125c.db'
+1
+analyze -format verilog -library WORK [glob ../rtl/periph/*.v]
+Running PRESTO HDLC
+Compiling source file ../rtl/periph/omsp_timerA.v
+Opening include file ../rtl/omsp_timerA_defines.v
+Opening include file ../rtl/omsp_timerA_undefines.v
+Opening include file ../rtl/omsp_timerA_undefines.v
+Compiling source file ../rtl/periph/omsp_gpio.v
+Compiling source file ../rtl/periph/omsp_timerA_undefines.v
+Compiling source file ../rtl/periph/template_periph_16b.v
+Compiling source file ../rtl/periph/omsp_timerA_defines.v
+Opening include file ../rtl/omsp_timerA_undefines.v
+Compiling source file ../rtl/periph/template_periph_8b.v
+Presto compilation completed successfully.
+1
+elaborate openMSP430 -library WORK
+Loading db file '/usr/local/synopsys/syn/W-2024.09-SP5-4/libraries/syn/gtech.db'
+Loading db file '/usr/local/synopsys/syn/W-2024.09-SP5-4/libraries/syn/standard.sldb'
+  Loading link library 'saed32rvt_ss0p75v125c'
+  Loading link library 'saed32lvt_ss0p75v125c'
+  Loading link library 'saed32hvt_ss0p75v125c'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+Presto compilation completed successfully. (openMSP430)
+Module: openMSP430, Ports: 260, Input: 124, Output: 136, Inout: 0
+Module: openMSP430, Registers: 0, Async set/reset: 0, Sync set/reset: 0
+Information: Module openMSP430 report end. (ELAB-965)
+Elaborated 1 design.
+Current design is now 'openMSP430'.
+Information: Building the design 'omsp_clock_module'. (HDL-193)
+
+Inferred memory devices in process in routine 'omsp_clock_module' in file
+	 ../rtl/omsp_clock_module.v'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|     bcsctl1_reg     | Flip-flop |   8   |  Y  | N  | None  | Async | N  | 248  |
+|     bcsctl2_reg     | Flip-flop |   8   |  Y  | N  | None  | Async | N  | 287  |
+|  lfxt_clk_dly_reg   | Flip-flop |   1   |  N  | N  | None  | Async | N  | 632  |
+|    aclk_div_reg     | Flip-flop |   3   |  Y  | N  | None  | Async | N  | 950  |
+|     aclk_en_reg     | Flip-flop |   1   |  N  | N  | None  | Async | N  | 954  |
+|    smclk_en_reg     | Flip-flop |   1   |  N  | N  | None  | Async | N  | 1138 |
+|    smclk_div_reg    | Flip-flop |   3   |  Y  | N  | None  | Async | N  | 1142 |
+| dbg_rst_noscan_reg  | Flip-flop |   1   |  N  | N  | Async | None  | N  | 1243 |
+==================================================================================
+Presto compilation completed successfully. (omsp_clock_module)
+Module: omsp_clock_module, Ports: 83, Input: 50, Output: 33, Inout: 0
+Module: omsp_clock_module, Registers: 26, Async set/reset: 26, Sync set/reset: 0
+Information: Module omsp_clock_module report end. (ELAB-965)
+Information: Building the design 'omsp_frontend'. (HDL-193)
+Warning:  ../rtl/omsp_frontend.v:194: signed to unsigned part selection occurs. (VER-318)
+
+Statistics for case statements in always block in file
+	'../rtl/omsp_frontend.v'
+============================================================
+|    Line    |  full/ parallel  |      block location      |
+============================================================
+|    256     |    auto/auto     | always block at line 254 |
+|    696     |    auto/auto     | always block at line 691 |
+|    703     |    auto/auto     | always block at line 691 |
+|    710     |    auto/auto     | always block at line 691 |
+|    717     |    auto/auto     | always block at line 691 |
+|    773     |    auto/auto     | always block at line 768 |
+|    778     |    auto/auto     | always block at line 768 |
+|    783     |    auto/auto     | always block at line 768 |
+|    882     |    auto/auto     | always block at line 879 |
+============================================================
+
+Inferred memory devices in process in routine 'omsp_frontend' in file
+	 ../rtl/omsp_frontend.v'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|     i_state_reg     | Flip-flop |   3   |  Y  | N  | None  | Async | N  | 276  |
+|   cpu_halt_st_reg   | Flip-flop |   1   |  N  | N  | None  | Async | N  | 287  |
+|  inst_irq_rst_reg   | Flip-flop |   1   |  N  | N  | Async | None  | N  | 302  |
+|     irq_num_reg     | Flip-flop |   6   |  Y  | N  | Async | None  | N  | 334  |
+|       pc_reg        | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 426  |
+|    pmem_busy_reg    | Flip-flop |   1   |  N  | N  | None  | Async | N  | 432  |
+|    inst_sext_reg    | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 474  |
+|    inst_dext_reg    | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 501  |
+|    inst_type_reg    | Flip-flop |   3   |  Y  | N  | None  | Async | N  | 540  |
+|     inst_so_reg     | Flip-flop |   8   |  Y  | N  | None  | Async | N  | 565  |
+|  inst_jmp_bin_reg   | Flip-flop |   3   |  Y  | N  | None  | Async | N  | 588  |
+|    inst_mov_reg     | Flip-flop |   1   |  N  | N  | None  | Async | N  | 621  |
+|  inst_dest_bin_reg  | Flip-flop |   4   |  Y  | N  | None  | Async | N  | 636  |
+|  inst_src_bin_reg   | Flip-flop |   4   |  Y  | N  | None  | Async | N  | 654  |
+|     inst_as_reg     | Flip-flop |   8   |  Y  | N  | None  | Async | N  | 727  |
+|     inst_ad_reg     | Flip-flop |   8   |  Y  | N  | None  | Async | N  | 790  |
+|     inst_bw_reg     | Flip-flop |   1   |  N  | N  | None  | Async | N  | 805  |
+|     inst_sz_reg     | Flip-flop |   2   |  Y  | N  | None  | Async | N  | 812  |
+|    exec_jmp_reg     | Flip-flop |   1   |  N  | N  | None  | Async | N  | 842  |
+|   exec_dst_wr_reg   | Flip-flop |   1   |  N  | N  | None  | Async | N  | 848  |
+|   exec_src_wr_reg   | Flip-flop |   1   |  N  | N  | None  | Async | N  | 854  |
+|  exec_dext_rdy_reg  | Flip-flop |   1   |  N  | N  | None  | Async | N  | 860  |
+|     e_state_reg     | Flip-flop |   2   |  Y  | N  | Async | Async | N  | 913  |
+|    inst_alu_reg     | Flip-flop |  12   |  Y  | N  | None  | Async | N  | 1000 |
+==================================================================================
+Presto compilation completed successfully. (omsp_frontend)
+Module: omsp_frontend, Ports: 255, Input: 66, Output: 189, Inout: 0
+Module: omsp_frontend, Registers: 122, Async set/reset: 122, Sync set/reset: 0
+Information: Module omsp_frontend report end. (ELAB-965)
+Information: Building the design 'omsp_execution_unit'. (HDL-193)
+
+Inferred memory devices in process in routine 'omsp_execution_unit' in file
+	 ../rtl/omsp_execution_unit.v'.
+===================================================================================
+|    Register Name     |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+===================================================================================
+|   mdb_out_nxt_reg    | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 364  |
+|     mab_lsb_reg      | Flip-flop |   1   |  N  | N  | None  | Async | N  | 378  |
+|  mdb_in_buf_en_reg   | Flip-flop |   1   |  N  | N  | None  | Async | N  | 387  |
+| mdb_in_buf_valid_reg | Flip-flop |   1   |  N  | N  | None  | Async | N  | 392  |
+|    mdb_in_buf_reg    | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 407  |
+===================================================================================
+Presto compilation completed successfully. (omsp_execution_unit)
+Module: omsp_execution_unit, Ports: 261, Input: 188, Output: 73, Inout: 0
+Module: omsp_execution_unit, Registers: 35, Async set/reset: 35, Sync set/reset: 0
+Information: Module omsp_execution_unit report end. (ELAB-965)
+Information: Building the design 'omsp_mem_backbone'. (HDL-193)
+Warning:  ../rtl/omsp_mem_backbone.v:227: signed to unsigned conversion occurs. (VER-318)
+Warning:  ../rtl/omsp_mem_backbone.v:230: signed to unsigned conversion occurs. (VER-318)
+Warning:  ../rtl/omsp_mem_backbone.v:236: signed to unsigned conversion occurs. (VER-318)
+Warning:  ../rtl/omsp_mem_backbone.v:239: signed to unsigned conversion occurs. (VER-318)
+Warning:  ../rtl/omsp_mem_backbone.v:286: signed to unsigned conversion occurs. (VER-318)
+Warning:  ../rtl/omsp_mem_backbone.v:293: signed to unsigned conversion occurs. (VER-318)
+
+Inferred memory devices in process in routine 'omsp_mem_backbone' in file
+	 ../rtl/omsp_mem_backbone.v'.
+======================================================================================
+|      Register Name      |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+======================================================================================
+|    dma_ready_dly_reg    | Flip-flop |   1   |  N  | N  | None  | Async | N  | 179  |
+|    per_dout_val_reg     | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 306  |
+|   fe_pmem_en_dly_reg    | Flip-flop |   1   |  N  | N  | None  | Async | N  | 318  |
+|   pmem_dout_bckup_reg   | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 336  |
+| pmem_dout_bckup_sel_reg | Flip-flop |   1   |  N  | N  | None  | Async | N  | 346  |
+|    eu_mdb_in_sel_reg    | Flip-flop |   2   |  Y  | N  | None  | Async | N  | 360  |
+|   ext_mem_din_sel_reg   | Flip-flop |   2   |  Y  | N  | None  | Async | N  | 375  |
+======================================================================================
+Presto compilation completed successfully. (omsp_mem_backbone)
+Module: omsp_mem_backbone, Ports: 331, Input: 172, Output: 159, Inout: 0
+Module: omsp_mem_backbone, Registers: 39, Async set/reset: 39, Sync set/reset: 0
+Information: Module omsp_mem_backbone report end. (ELAB-965)
+Information: Building the design 'omsp_sfr'. (HDL-193)
+Warning:  ../rtl/omsp_sfr.v:240: signed to unsigned assignment occurs. (VER-318)
+Warning:  ../rtl/omsp_sfr.v:246: signed to unsigned assignment occurs. (VER-318)
+Warning:  ../rtl/omsp_sfr.v:247: signed to unsigned assignment occurs. (VER-318)
+
+Inferred memory devices in process in routine 'omsp_sfr' in file
+	 ../rtl/omsp_sfr.v'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|      nmie_reg       | Flip-flop |   1   |  N  | N  | None  | Async | N  | 172  |
+|      wdtie_reg      | Flip-flop |   1   |  N  | N  | None  | Async | N  | 182  |
+|     nmiifg_reg      | Flip-flop |   1   |  N  | N  | None  | Async | N  | 202  |
+|     nmi_dly_reg     | Flip-flop |   1   |  N  | N  | None  | Async | N  | 345  |
+==================================================================================
+Presto compilation completed successfully. (omsp_sfr)
+Module: omsp_sfr, Ports: 109, Input: 56, Output: 53, Inout: 0
+Module: omsp_sfr, Registers: 4, Async set/reset: 4, Sync set/reset: 0
+Information: Module omsp_sfr report end. (ELAB-965)
+Information: Building the design 'omsp_watchdog'. (HDL-193)
+
+Statistics for case statements in always block in file
+	'../rtl/omsp_watchdog.v'
+============================================================
+|    Line    |  full/ parallel  |      block location      |
+============================================================
+|    513     |    auto/auto     | always block at line 512 |
+============================================================
+
+Inferred memory devices in process in routine 'omsp_watchdog' in file
+	 ../rtl/omsp_watchdog.v'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|     wdtctl_reg      | Flip-flop |   7   |  Y  | N  | None  | Async | N  | 192  |
+|     wdtcnt_reg      | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 502  |
+|     wdtifg_reg      | Flip-flop |   1   |  N  | N  | None  | Async | N  | 534  |
+|    wdt_reset_reg    | Flip-flop |   1   |  N  | N  | None  | Async | N  | 550  |
+==================================================================================
+Presto compilation completed successfully. (omsp_watchdog)
+Module: omsp_watchdog, Ports: 68, Input: 47, Output: 21, Inout: 0
+Module: omsp_watchdog, Registers: 25, Async set/reset: 25, Sync set/reset: 0
+Information: Module omsp_watchdog report end. (ELAB-965)
+Information: Building the design 'omsp_multiplier'. (HDL-193)
+Warning:  ../rtl/omsp_multiplier.v:389: unsigned to signed assignment occurs. (VER-318)
+Warning:  ../rtl/omsp_multiplier.v:390: unsigned to signed assignment occurs. (VER-318)
+Warning:  ../rtl/omsp_multiplier.v:391: unsigned to signed assignment occurs. (VER-318)
+Warning:  ../rtl/omsp_multiplier.v:398: signed to unsigned part selection occurs. (VER-318)
+
+Inferred memory devices in process in routine 'omsp_multiplier' in file
+	 ../rtl/omsp_multiplier.v'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|       op1_reg       | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 172  |
+|       op2_reg       | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 197  |
+|      reslo_reg      | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 224  |
+|      reshi_reg      | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 253  |
+|    sumext_s_reg     | Flip-flop |   2   |  Y  | N  | None  | Async | N  | 272  |
+|    sign_sel_reg     | Flip-flop |   1   |  N  | N  | None  | Async | N  | 312  |
+|     acc_sel_reg     | Flip-flop |   1   |  N  | N  | None  | Async | N  | 323  |
+|      cycle_reg      | Flip-flop |   2   |  Y  | N  | None  | Async | N  | 381  |
+==================================================================================
+Presto compilation completed successfully. (omsp_multiplier)
+Module: omsp_multiplier, Ports: 52, Input: 36, Output: 16, Inout: 0
+Module: omsp_multiplier, Registers: 70, Async set/reset: 70, Sync set/reset: 0
+Information: Module omsp_multiplier report end. (ELAB-965)
+Information: Building the design 'omsp_dbg'. (HDL-193)
+Warning:  ../rtl/omsp_dbg.v:754: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+
+Statistics for case statements in always block in file
+	'../rtl/omsp_dbg.v'
+============================================================
+|    Line    |  full/ parallel  |      block location      |
+============================================================
+|    241     |    auto/auto     | always block at line 240 |
+|    747     |    auto/auto     | always block at line 746 |
+============================================================
+
+Inferred memory devices in process in routine 'omsp_dbg' in file
+	 ../rtl/omsp_dbg.v'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|     cpu_ctl_reg     | Flip-flop |   4   |  Y  | N  | Async | Async | N  | 328  |
+|    cpu_stat_reg     | Flip-flop |   2   |  Y  | N  | None  | Async | N  | 354  |
+|     mem_ctl_reg     | Flip-flop |   3   |  Y  | N  | None  | Async | N  | 389  |
+|    mem_start_reg    | Flip-flop |   1   |  N  | N  | None  | Async | N  | 396  |
+|    mem_data_reg     | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 414  |
+|    mem_addr_reg     | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 433  |
+|     mem_cnt_reg     | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 446  |
+|   dbg_rd_rdy_reg    | Flip-flop |   1   |  N  | N  | None  | Async | N  | 646  |
+|    inc_step_reg     | Flip-flop |   2   |  Y  | N  | None  | Async | N  | 679  |
+|    halt_flag_reg    | Flip-flop |   1   |  N  | N  | None  | Async | N  | 696  |
+|    mem_burst_reg    | Flip-flop |   1   |  N  | N  | None  | Async | N  | 715  |
+|   mem_startb_reg    | Flip-flop |   1   |  N  | N  | None  | Async | N  | 726  |
+|    mem_state_reg    | Flip-flop |   2   |  Y  | N  | None  | Async | N  | 759  |
+| dbg_mem_rd_dly_reg  | Flip-flop |   1   |  N  | N  | None  | Async | N  | 788  |
+==================================================================================
+Presto compilation completed successfully. (omsp_dbg)
+Module: omsp_dbg, Ports: 196, Input: 155, Output: 41, Inout: 0
+Module: omsp_dbg, Registers: 67, Async set/reset: 67, Sync set/reset: 0
+Information: Module omsp_dbg report end. (ELAB-965)
+Information: Building the design 'omsp_sync_cell'. (HDL-193)
+
+Inferred memory devices in process in routine 'omsp_sync_cell' in file
+	 ../rtl/omsp_sync_cell.v'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|    data_sync_reg    | Flip-flop |   2   |  Y  | N  | None  | Async | N  |  72  |
+==================================================================================
+Presto compilation completed successfully. (omsp_sync_cell)
+Module: omsp_sync_cell, Ports: 4, Input: 3, Output: 1, Inout: 0
+Module: omsp_sync_cell, Registers: 2, Async set/reset: 2, Sync set/reset: 0
+Information: Module omsp_sync_cell report end. (ELAB-965)
+Information: Building the design 'omsp_sync_reset'. (HDL-193)
+
+Inferred memory devices in process in routine 'omsp_sync_reset' in file
+	 ../rtl/omsp_sync_reset.v'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|    data_sync_reg    | Flip-flop |   2   |  Y  | N  | Async | None  | N  |  70  |
+==================================================================================
+Presto compilation completed successfully. (omsp_sync_reset)
+Module: omsp_sync_reset, Ports: 3, Input: 2, Output: 1, Inout: 0
+Module: omsp_sync_reset, Registers: 2, Async set/reset: 2, Sync set/reset: 0
+Information: Module omsp_sync_reset report end. (ELAB-965)
+Information: Building the design 'omsp_register_file'. (HDL-193)
+
+Inferred memory devices in process in routine 'omsp_register_file' in file
+	 ../rtl/omsp_register_file.v'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|       r1_reg        | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 162  |
+|       r2_reg        | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 245  |
+|       r3_reg        | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 275  |
+|       r4_reg        | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 303  |
+|       r5_reg        | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 327  |
+|       r6_reg        | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 351  |
+|       r7_reg        | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 375  |
+|       r8_reg        | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 399  |
+|       r9_reg        | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 423  |
+|       r10_reg       | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 447  |
+|       r11_reg       | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 471  |
+|       r12_reg       | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 495  |
+|       r13_reg       | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 519  |
+|       r14_reg       | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 543  |
+|       r15_reg       | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 567  |
+==================================================================================
+Presto compilation completed successfully. (omsp_register_file)
+Module: omsp_register_file, Ports: 156, Input: 98, Output: 58, Inout: 0
+Module: omsp_register_file, Registers: 240, Async set/reset: 240, Sync set/reset: 0
+Information: Module omsp_register_file report end. (ELAB-965)
+Information: Building the design 'omsp_alu'. (HDL-193)
+Presto compilation completed successfully. (omsp_alu)
+Module: omsp_alu, Ports: 107, Input: 67, Output: 40, Inout: 0
+Module: omsp_alu, Registers: 0, Async set/reset: 0, Sync set/reset: 0
+Information: Module omsp_alu report end. (ELAB-965)
+Information: Building the design 'omsp_dbg_uart'. (HDL-193)
+
+Statistics for case statements in always block in file
+	'../rtl/omsp_dbg_uart.v'
+============================================================
+|    Line    |  full/ parallel  |      block location      |
+============================================================
+|    161     |    auto/auto     | always block at line 160 |
+============================================================
+
+Inferred memory devices in process in routine 'omsp_dbg_uart' in file
+	 ../rtl/omsp_dbg_uart.v'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|     rxd_buf_reg     | Flip-flop |   2   |  Y  | N  | Async | None  | N  | 116  |
+|     rxd_maj_reg     | Flip-flop |   1   |  N  | N  | Async | None  | N  | 128  |
+|   uart_state_reg    | Flip-flop |   3   |  Y  | N  | None  | Async | N  | 184  |
+|    sync_busy_reg    | Flip-flop |   1   |  N  | N  | None  | Async | N  | 203  |
+|    sync_cnt_reg     | Flip-flop |  19   |  Y  | N  | Async | Async | N  | 213  |
+|    xfer_bit_reg     | Flip-flop |   4   |  Y  | N  | None  | Async | N  | 237  |
+|    xfer_cnt_reg     | Flip-flop |  16   |  Y  | N  | None  | Async | N  | 243  |
+|    xfer_buf_reg     | Flip-flop |  20   |  Y  | N  | None  | Async | N  | 254  |
+|  dbg_uart_txd_reg   | Flip-flop |   1   |  N  | N  | Async | None  | N  | 264  |
+|    dbg_addr_reg     | Flip-flop |   6   |  Y  | N  | None  | Async | N  | 274  |
+|     dbg_bw_reg      | Flip-flop |   1   |  N  | N  | None  | Async | N  | 279  |
+==================================================================================
+Presto compilation completed successfully. (omsp_dbg_uart)
+Module: omsp_dbg_uart, Ports: 50, Input: 25, Output: 25, Inout: 0
+Module: omsp_dbg_uart, Registers: 74, Async set/reset: 74, Sync set/reset: 0
+Information: Module omsp_dbg_uart report end. (ELAB-965)
+1
+current_design openMSP430
+Current design is 'openMSP430'.
+{openMSP430}
+link
+
+  Linking design 'openMSP430'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  * (14 designs)              /home/cegrad/xhuan230/cs220/midterm-team-5/syn/openMSP430.db, etc
+  saed32rvt_ss0p75v125c (library) /usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_rvt/db_nldm/saed32rvt_ss0p75v125c.db
+  saed32lvt_ss0p75v125c (library) /usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_lvt/db_nldm/saed32lvt_ss0p75v125c.db
+  saed32hvt_ss0p75v125c (library) /usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_hvt/db_nldm/saed32hvt_ss0p75v125c.db
+
+1
+set_fix_multiple_port_nets -all -buffer_constants
+1
+set_verification_top
+1
+# Coarse-to-fine sweep: walk down until slack goes negative, then the last
+# non-negative point is the Fmax. The earlier coarse pass already proved 4.0ns
+# closes; we now push below 4.0ns to find the true closure edge.
+set periods {4.0 3.6 3.2 2.8 2.4 2.0 1.8 1.6 1.4 1.2 1.0}
+4.0 3.6 3.2 2.8 2.4 2.0 1.8 1.6 1.4 1.2 1.0
+set best_period ""
+set best_slack -9999
+-9999
+foreach p $periods {
+  # remove_clock expects a 1-element list; in practice [all_clocks] can be empty.
+  set clks [all_clocks]
+  if {[llength $clks] > 0} {
+    foreach c $clks {
+      remove_clock $c
+    }
+  }
+  create_clock -period $p -name dco_clk [get_ports dco_clk]
+
+  compile_ultra -gate_clock
+  set tp [get_timing_paths -max_paths 1 -delay max]
+  set ws [get_attribute $tp slack]
+
+  puts "SWEEP: period=$p ns, worst_slack=$ws"
+  if {$ws >= 0} {
+    set best_period $p
+    set best_slack $ws
+  } else {
+    # First negative-slack point: timing has failed at this period. The previous
+    # period is the true Fmax — stop probing further (compile_ultra is expensive).
+    puts "SWEEP: negative slack at period=$p — stop, Fmax = ${best_period} ns"
+    break
+  }
+}
+Loading db file '/usr/local/synopsys/syn/W-2024.09-SP5-4/libraries/syn/dw_foundation.sldb'
+Information: Failed to find dw_foundation.sldb in the user defined search_path, load it from 'Synopsys Root'. (UISN-70)
+Warning: DesignWare synthetic library dw_foundation.sldb is added to the synthetic_library in the current command. (UISN-40)
+Information: Performing leakage power optimization. (PWR-850)
+CPU Load: 41%, Ram Free: 186 GB, Swap Free: 3 GB, Work Disk Free: 3806 GB, Tmp Disk Free: 224 GB
+Alib files are up-to-date.
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | W-2024.09-DWBB_202409.5 |     *     |
+| Licensed DW Building Blocks        | W-2024.09-DWBB_202409.5 |     *     |
+============================================================================
+
+====================================================================================================
+| Flow Information                                                                                 |
+----------------------------------------------------------------------------------------------------
+| Flow         | Design Compiler WLM                                                               |
+| Command Line | compile_ultra -gate_clock                                                         |
+====================================================================================================
+| Design Information                                      | Value                                  |
+====================================================================================================
+| Number of Scenarios                                     | 0                                      |
+| Leaf Cell Count                                         | 5986                                   |
+| Number of User Hierarchies                              | 16                                     |
+| Sequential Cell Count                                   | 712                                    |
+| Macro Count                                             | 0                                      |
+| Pad Count                                               | 0                                      |
+| Number of Power Domains                                 | 0                                      |
+| Number of Path Groups                                   | 2                                      |
+| Number of VT Class                                      | 3                                      |
+| Number of Clocks                                        | 1                                      |
+| Number of Dont Touch Cells                              | 832                                    |
+| Number of Dont Touch Nets                               | 0                                      |
+| Number of Size Only Cells                               | 0                                      |
+| Design with Target Library Subset (with clock_path)     | false  (false )                        |
+| Design with UPF Data                                    | false                                  |
+----------------------------------------------------------------------------------------------------
+| Variables                                               | Value                                  |
+----------------------------------------------------------------------------------------------------
+| set_fix_multiple_port_nets                              | -all -buffer_constants                 |
+====================================================================================================
+Information: Sequential output inversion is enabled.  SVF file must be used for formal verification. (OPT-1208)
+
+Information: There are 287 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+Information: Uniquified 4 instances of design 'omsp_sync_cell'. (OPT-1056)
+  Simplifying Design 'openMSP430'
+Information: The register 'frontend_0/inst_ad_reg[2]' will be removed. (OPT-1207)
+Information: The register 'frontend_0/inst_ad_reg[2]' will be removed. (OPT-1207)
+Information: The register 'frontend_0/inst_ad_reg[3]' will be removed. (OPT-1207)
+Information: The register 'frontend_0/inst_ad_reg[3]' will be removed. (OPT-1207)
+Information: The register 'frontend_0/inst_ad_reg[5]' will be removed. (OPT-1207)
+Information: The register 'frontend_0/inst_ad_reg[5]' will be removed. (OPT-1207)
+Information: The register 'frontend_0/inst_ad_reg[7]' will be removed. (OPT-1207)
+Information: The register 'frontend_0/inst_ad_reg[7]' will be removed. (OPT-1207)
+Information: The register 'frontend_0/inst_so_reg[2]' will be removed. (OPT-1207)
+Information: The register 'frontend_0/inst_so_reg[2]' will be removed. (OPT-1207)
+Information: Performing clock-gating with positive edge logic: 'integrated' and negative edge logic: 'integrated'. (PWR-1047)
+
+Loaded alib file './alib-52/saed32rvt_ss0p75v125c.db.alib' (placeholder)
+Loaded alib file './alib-52/saed32lvt_ss0p75v125c.db.alib' (placeholder)
+Loaded alib file './alib-52/saed32hvt_ss0p75v125c.db.alib'
+Module: DW01_NAND2, Ports: 3, Input: 2, Output: 1, Inout: 0
+Module: DW01_NAND2, Registers: 0, Async set/reset: 0, Sync set/reset: 0
+  Building model 'DW01_NAND2'
+Information: Ungrouping hierarchy clock_module_0 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy frontend_0 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy execution_unit_0 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy mem_backbone_0 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy sfr_0 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy watchdog_0 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy multiplier_0 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy dbg_0 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy clock_module_0/sync_cell_lfxt_clk before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy clock_module_0/sync_reset_por before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy execution_unit_0/register_file_0 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy execution_unit_0/alu_0 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy dbg_0/dbg_uart_0 before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy sfr_0/sync_cell_nmi before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy clock_module_0/sync_cell_puc before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy dbg_0/dbg_uart_0/sync_cell_uart_rxd before Pass 1 (OPT-776)
+Information: Ungrouping 16 of 58 hierarchies before Pass 1 (OPT-775)
+CPU Load: 58%, Ram Free: 185 GB, Swap Free: 3 GB, Work Disk Free: 3806 GB, Tmp Disk Free: 224 GB
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'openMSP430'
+Information: Added key list 'DesignWare' to design 'openMSP430'. (DDB-72)
+Information: The register 'execution_unit_0/register_file_0/r2_reg[14]' is a constant and will be removed. (OPT-1206)
+Information: The register 'execution_unit_0/register_file_0/r2_reg[13]' is a constant and will be removed. (OPT-1206)
+Information: The register 'execution_unit_0/register_file_0/r2_reg[12]' is a constant and will be removed. (OPT-1206)
+Information: The register 'execution_unit_0/register_file_0/r2_reg[11]' is a constant and will be removed. (OPT-1206)
+Information: The register 'execution_unit_0/register_file_0/r2_reg[10]' is a constant and will be removed. (OPT-1206)
+Information: The register 'execution_unit_0/register_file_0/r2_reg[9]' is a constant and will be removed. (OPT-1206)
+Information: The register 'execution_unit_0/register_file_0/r2_reg[15]' is a constant and will be removed. (OPT-1206)
+Information: The register 'frontend_0/irq_num_reg[4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'frontend_0/irq_num_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'execution_unit_0/register_file_0/r2_reg[6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'execution_unit_0/register_file_0/r1_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'watchdog_0/wdtctl_reg[3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'clock_module_0/bcsctl1_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'clock_module_0/bcsctl1_reg[2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'clock_module_0/bcsctl1_reg[6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'clock_module_0/bcsctl1_reg[7]' is a constant and will be removed. (OPT-1206)
+Information: The register 'clock_module_0/bcsctl2_reg[0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'clock_module_0/bcsctl2_reg[4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'clock_module_0/bcsctl2_reg[5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'clock_module_0/bcsctl2_reg[6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'clock_module_0/bcsctl2_reg[7]' is a constant and will be removed. (OPT-1206)
+Information: In design 'openMSP430', the register 'frontend_0/inst_src_bin_reg[2]' is removed because it is merged to 'frontend_0/inst_jmp_bin_reg[0]'. (OPT-1215)
+Information: In design 'openMSP430', the register 'frontend_0/inst_src_bin_reg[3]' is removed because it is merged to 'frontend_0/inst_jmp_bin_reg[1]'. (OPT-1215)
+ Implement Synthetic for 'openMSP430'.
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_0'
+  Mapping integrated clock gating circuitry
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_register_file_0'
+  Mapping integrated clock gating circuitry
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_dbg_0'
+  Mapping integrated clock gating circuitry
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_multiplier_0'
+  Mapping integrated clock gating circuitry
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_watchdog_0'
+  Mapping integrated clock gating circuitry
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_mem_backbone'
+  Mapping integrated clock gating circuitry
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_0'
+  Mapping integrated clock gating circuitry
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_frontend_0'
+  Mapping integrated clock gating circuitry
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_clock_module_0'
+  Mapping integrated clock gating circuitry
+CPU Load: 66%, Ram Free: 186 GB, Swap Free: 3 GB, Work Disk Free: 3806 GB, Tmp Disk Free: 224 GB
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+Information: The library cell 'PMT3_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT3_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT3_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The target library(s) contains cell(s), other than black boxes, that are not characterized for internal power. (PWR-24)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_mem_backbone, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_watchdog_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_14, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_5, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design openMSP430_RSOP_412, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design openMSP430_DP_OP_416J1_125_4281_J1_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design openMSP430_DP_OP_415J1_124_4281_J1_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design openMSP430_DP_OP_414J1_123_4281_J1_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design openMSP430_DP_OP_413J1_122_4281_J1_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design openMSP430_DW01_dec_J1_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design openMSP430_DW01_inc_J1_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design openMSP430_DW01_add_J1_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design openMSP430_DW01_add_J1_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design openMSP430_DW_mult_tc_J1_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design openMSP430_DW01_inc_J1_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design openMSP430_DW01_add_J1_4, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design openMSP430_DP_OP_308J1_126_5527_J1_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_4, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_4, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_5, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_6, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_7, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_8, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_9, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_10, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_11, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_12, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_13, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_watchdog_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_2, since there are no registers. (PWR-806)
+Information: Performing clock-gating on design openMSP430. (PWR-730)
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 100.00%, saed32cell_lvt 0.00%, saed32cell_svt 0.00%
+
+  Beginning Mapping Optimizations  (Ultra High effort)
+  -------------------------------
+  Mapping Optimization (Phase 1)
+  Mapping Optimization (Phase 2)
+  Mapping Optimization (Phase 3)
+  Mapping Optimization (Phase 4)
+  Mapping Optimization (Phase 5)
+  Mapping Optimization (Phase 6)
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:41   18302.7      0.77      82.3     165.2                           2587472384.0000
+    0:00:41   18288.7      0.78      82.8     165.2                           2585096448.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 2.52%, saed32cell_lvt 97.38%, saed32cell_svt 0.10%
+
+  Beginning Constant Register Removal
+  -----------------------------------
+    0:00:41   18307.0      0.78      82.8     165.2                           2590047488.0000
+    0:00:42   18303.2      0.79      83.5     165.2                           2589590528.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 2.52%, saed32cell_lvt 97.38%, saed32cell_svt 0.10%
+
+  Beginning Global Optimizations
+  ------------------------------
+  Numerical Synthesis (Phase 1)
+  Numerical Synthesis (Phase 2)
+  Global Optimization (Phase 1)
+  Global Optimization (Phase 2)
+  Global Optimization (Phase 3)
+  Global Optimization (Phase 4)
+  Global Optimization (Phase 5)
+  Global Optimization (Phase 6)
+  Global Optimization (Phase 7)
+  Global Optimization (Phase 8)
+  Global Optimization (Phase 9)
+  Global Optimization (Phase 10)
+  Global Optimization (Phase 11)
+  Global Optimization (Phase 12)
+  Global Optimization (Phase 13)
+  Global Optimization (Phase 14)
+  Global Optimization (Phase 15)
+  Global Optimization (Phase 16)
+  Global Optimization (Phase 17)
+  Global Optimization (Phase 18)
+  Global Optimization (Phase 19)
+  Global Optimization (Phase 20)
+  Global Optimization (Phase 21)
+  Global Optimization (Phase 22)
+  Global Optimization (Phase 23)
+  Global Optimization (Phase 24)
+  Global Optimization (Phase 25)
+  Global Optimization (Phase 26)
+  Global Optimization (Phase 27)
+  Global Optimization (Phase 28)
+  Global Optimization (Phase 29)
+  Global Optimization (Phase 30)
+  Mapping 'openMSP430_DW_mult_tc_8'
+  Mapping 'openMSP430_DW01_add_9'
+  Mapping 'openMSP430_DW_mult_tc_9'
+  Mapping 'openMSP430_DW01_add_10'
+  Mapping 'openMSP430_DW_mult_tc_10'
+  Mapping 'openMSP430_DW01_add_11'
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 1.63%, saed32cell_lvt 97.39%, saed32cell_svt 0.98%
+
+  Beginning Isolate Ports
+  -----------------------
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 1.62%, saed32cell_lvt 97.39%, saed32cell_svt 0.98%
+
+  Beginning Delay Optimization
+  ----------------------------
+    0:00:45   16750.1      8.16     385.5     169.5                           2239461632.0000
+    0:00:48   17003.5      2.32      93.5     129.2                           2299663872.0000
+    0:00:48   17003.5      2.32      93.5     129.2                           2299663872.0000
+    0:00:49   17007.1      2.32      93.5     129.2                           2301551616.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 0.87%, saed32cell_lvt 98.13%, saed32cell_svt 1.00%
+    0:00:50   16999.4      2.45     189.2     129.2                           2299037184.0000
+    0:00:50   16999.4      2.45     189.2     129.2                           2299037184.0000
+
+  Beginning WLM Backend Optimization
+  --------------------------------------
+    0:00:52   16831.7      2.45     124.9     126.0                           2272712960.0000
+    0:00:52   16844.2      0.77      20.2     127.6                           2290613504.0000
+    0:00:52   16844.2      0.77      20.2     127.6                           2290613504.0000
+    0:00:52   16844.2      0.77      20.2     127.6                           2290613504.0000
+    0:00:52   16844.2      0.77      20.2     127.6                           2290613504.0000
+    0:00:53   16776.8      0.77      19.5     126.9                           2204817664.0000
+    0:00:53   16776.8      0.77      19.5     126.9                           2204817664.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+
+
+  Beginning Design Rule Fixing  (max_transition)  (max_capacitance)
+  ----------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:59   17007.6      0.00       0.0     134.1                           2221689600.0000
+  Global Optimization (Phase 31)
+  Global Optimization (Phase 32)
+  Global Optimization (Phase 33)
+    0:00:59   17015.7      0.00       0.0       0.0                           2221550592.0000
+    0:00:59   17015.7      0.00       0.0       0.0                           2221550592.0000
+    0:00:59   17015.7      0.00       0.0       0.0                           2221550592.0000
+    0:00:59   17015.7      0.00       0.0       0.0                           2221550592.0000
+    0:00:59   17015.7      0.00       0.0       0.0                           2221550592.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+    0:01:00   16980.4      0.00       0.0       0.0                           1821475712.0000
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:01:00   16994.4      0.00       0.0       0.0                           1821492736.0000
+    0:01:02   16754.4      0.05       0.2       1.4                           1713923456.0000
+    0:01:02   16756.2      0.00       0.0       1.4                           1715237376.0000
+    0:01:02   16756.2      0.00       0.0       1.4                           1715237376.0000
+    0:01:02   16759.3      0.00       0.0       1.3                           1707314816.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 3.95%, saed32cell_lvt 57.71%, saed32cell_svt 38.34%
+
+  Beginning Delay Optimization HSVT Pass
+  --------------------------------------
+    0:01:03   16759.3      0.00       0.0       1.3                           1707314816.0000
+    0:01:03   16759.3      0.00       0.0       1.3                           1707314816.0000
+    0:01:03   16759.3      0.00       0.0       1.3                           1707314816.0000
+    0:01:03   16759.3      0.00       0.0       1.3                           1707314816.0000
+    0:01:04   16759.3      0.00       0.0       1.3                           1707314816.0000
+    0:01:04   16759.3      0.00       0.0       1.3                           1707314816.0000
+    0:01:04   16759.3      0.00       0.0       1.3                           1707314816.0000
+    0:01:04   16759.3      0.00       0.0       1.3                           1707314816.0000
+    0:01:08   16794.6      0.00       0.0       0.0                           1618549248.0000
+    0:01:08   16794.6      0.00       0.0       0.0                           1618549248.0000
+    0:01:08   16794.6      0.00       0.0       0.0                           1618549248.0000
+    0:01:08   16794.6      0.00       0.0       0.0                           1618549248.0000
+    0:01:08   16794.6      0.00       0.0       0.0                           1618549248.0000
+    0:01:08   16794.6      0.00       0.0       0.0                           1618549248.0000
+    0:01:09   16723.4      0.00       0.0       0.0                           1598522880.0000
+CPU Load: 32%, Ram Free: 185 GB, Swap Free: 3 GB, Work Disk Free: 3808 GB, Tmp Disk Free: 224 GB
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_rvt/db_nldm/saed32rvt_ss0p75v125c.db'
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_lvt/db_nldm/saed32lvt_ss0p75v125c.db'
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_hvt/db_nldm/saed32hvt_ss0p75v125c.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: State dependent leakage is now switched from off to on.
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+CPU Load: 30%, Ram Free: 185 GB, Swap Free: 3 GB, Work Disk Free: 3808 GB, Tmp Disk Free: 224 GB
+Information: Total number of MV cells in the design.
+----------------------------------------------------------------------------------------------------
+ MV Cells                                           Total Number                                   
+----------------------------------------------------------------------------------------------------
+ Level Shifter:                                     0                                             
+ Enable Level Shifter:                              0                                             
+ Isolation Cell:                                    0                                             
+ Retention Cell:                                    0                                             
+ Retention Clamp Cell:                              0                                             
+ Switch Cell:                                       0                                             
+ Always-On Cell:                                    0                                             
+ Repeater Cell:                                     0                                             
+
+----------------------------------------------------------------------------------------------------
+Unmapped MV Cells 
+----------------------------------------------------------------------------------------------------
+0 Isolation Cells are unmapped 
+0 Retention Clamp Cells are unmapped 
+----------------------------------------------------------------------------------------------------
+Information: Updating design information... (UID-85)
+SWEEP: period=4.0 ns, worst_slack=0.000636101
+Information: Failed to find dw_foundation.sldb in the user defined search_path, load it from 'Synopsys Root'. (UISN-70)
+Warning: DesignWare synthetic library dw_foundation.sldb is added to the synthetic_library in the current command. (UISN-40)
+Information: Starting from 2013.12 release, constant propagation is enabled even when boundary optimization is disabled. (OPT-1318)
+Information: Performing leakage power optimization. (PWR-850)
+CPU Load: 30%, Ram Free: 185 GB, Swap Free: 3 GB, Work Disk Free: 3808 GB, Tmp Disk Free: 224 GB
+Alib files are up-to-date.
+====================================================================================================
+| Flow Information                                                                                 |
+----------------------------------------------------------------------------------------------------
+| Flow         | Design Compiler WLM                                                               |
+| Command Line | compile_ultra -gate_clock                                                         |
+====================================================================================================
+| Design Information                                      | Value                                  |
+====================================================================================================
+| Number of Scenarios                                     | 0                                      |
+| Leaf Cell Count                                         | 5401                                   |
+| Number of User Hierarchies                              | 43                                     |
+| Sequential Cell Count                                   | 727                                    |
+| Macro Count                                             | 0                                      |
+| Pad Count                                               | 0                                      |
+| Number of Power Domains                                 | 0                                      |
+| Number of Path Groups                                   | 3                                      |
+| Number of VT Class                                      | 3                                      |
+| Number of Clocks                                        | 1                                      |
+| Number of Dont Touch Cells                              | 0                                      |
+| Number of Dont Touch Nets                               | 0                                      |
+| Number of Size Only Cells                               | 46                                     |
+| Design with Target Library Subset (with clock_path)     | false  (false )                        |
+| Design with UPF Data                                    | false                                  |
+----------------------------------------------------------------------------------------------------
+| Variables                                               | Value                                  |
+----------------------------------------------------------------------------------------------------
+| set_fix_multiple_port_nets                              | -all -buffer_constants                 |
+====================================================================================================
+Information: Sequential output inversion is enabled.  SVF file must be used for formal verification. (OPT-1208)
+
+Information: There are 63 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+  Simplifying Design 'openMSP430'
+
+Warning: The derived toggle-rate value (0.555556) for the clock net 'dco_clk' conflicts with the annotated value (0.500000). Using the set_switching_activity value. (PWR-12)
+Information: Ungrouping 0 of 44 hierarchies before Pass 1 (OPT-775)
+CPU Load: 28%, Ram Free: 185 GB, Swap Free: 3 GB, Work Disk Free: 3807 GB, Tmp Disk Free: 223 GB
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'openMSP430'
+  Processing 'SNPS_CLOCK_GATE_HIGH_openMSP430_1'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_5'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_register_file_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_register_file_14'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_dbg_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_dbg_2'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_multiplier_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_multiplier_3'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_watchdog_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_watchdog_1'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_mem_backbone'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_1'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_frontend_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_frontend_3'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_clock_module_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_clock_module_3'
+CPU Load: 27%, Ram Free: 185 GB, Swap Free: 3 GB, Work Disk Free: 3807 GB, Tmp Disk Free: 223 GB
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+Information: The library cell 'PMT3_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT3_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT3_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The target library(s) contains cell(s), other than black boxes, that are not characterized for internal power. (PWR-24)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_mem_backbone, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_watchdog_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_watchdog_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_14, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_13, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_5, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_4, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_openMSP430_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_openMSP430_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_4, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_5, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_6, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_7, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_8, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_9, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_10, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_11, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_12, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_1, since there are no registers. (PWR-806)
+Information: Performing clock-gating on design openMSP430. (PWR-730)
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 84.79%, saed32cell_lvt 13.36%, saed32cell_svt 1.85%
+
+  Beginning Mapping Optimizations  (Ultra High effort)
+  -------------------------------
+  Mapping Optimization (Phase 1)
+  Mapping Optimization (Phase 2)
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:38   19745.7      0.91      88.7     144.0                           2760377856.0000
+    0:00:38   19718.5      0.93      93.3     146.0                           2756109312.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 0.54%, saed32cell_lvt 98.25%, saed32cell_svt 1.21%
+
+  Beginning Constant Register Removal
+  -----------------------------------
+    0:00:39   19718.5      0.93      93.3     146.0                           2756109312.0000
+    0:00:39   19715.0      0.95      94.3     146.0                           2755757312.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 0.54%, saed32cell_lvt 98.25%, saed32cell_svt 1.21%
+
+  Beginning Global Optimizations
+  ------------------------------
+  Numerical Synthesis (Phase 1)
+  Numerical Synthesis (Phase 2)
+  Global Optimization (Phase 1)
+  Global Optimization (Phase 2)
+  Global Optimization (Phase 3)
+  Global Optimization (Phase 4)
+  Global Optimization (Phase 5)
+  Global Optimization (Phase 6)
+  Global Optimization (Phase 7)
+  Global Optimization (Phase 8)
+  Global Optimization (Phase 9)
+  Global Optimization (Phase 10)
+  Global Optimization (Phase 11)
+  Global Optimization (Phase 12)
+  Global Optimization (Phase 13)
+  Global Optimization (Phase 14)
+  Global Optimization (Phase 15)
+  Global Optimization (Phase 16)
+  Global Optimization (Phase 17)
+  Global Optimization (Phase 18)
+  Global Optimization (Phase 19)
+  Global Optimization (Phase 20)
+  Global Optimization (Phase 21)
+  Global Optimization (Phase 22)
+  Global Optimization (Phase 23)
+  Global Optimization (Phase 24)
+  Global Optimization (Phase 25)
+  Global Optimization (Phase 26)
+  Global Optimization (Phase 27)
+  Global Optimization (Phase 28)
+  Global Optimization (Phase 29)
+  Global Optimization (Phase 30)
+  Global Optimization (Phase 31)
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 17.21%, saed32cell_lvt 82.00%, saed32cell_svt 0.79%
+
+  Beginning Isolate Ports
+  -----------------------
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 17.21%, saed32cell_lvt 82.00%, saed32cell_svt 0.79%
+
+  Beginning Delay Optimization
+  ----------------------------
+    0:00:43   18027.5     52.29    3304.8      30.1                           1480839040.0000
+    0:00:54   17961.9      1.79     576.3      20.1                           2106834560.0000
+    0:00:54   17961.9      1.79     576.3      20.1                           2106834560.0000
+    0:00:55   17990.3      1.79     518.1      61.8                           2136964352.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 3.98%, saed32cell_lvt 94.94%, saed32cell_svt 1.08%
+    0:00:56   17990.3      1.79     518.1      61.8                           2136964352.0000
+    0:00:57   17981.7      1.79     518.0      61.7                           2136035328.0000
+
+  Beginning WLM Backend Optimization
+  --------------------------------------
+    0:00:58   17775.6      1.79     515.2      61.7                           2109881728.0000
+    0:01:00   17785.8      0.79      77.5      60.8                           2276212224.0000
+    0:01:00   17785.8      0.79      77.5      60.8                           2276212224.0000
+    0:01:01   17747.4      0.79      76.8      58.4                           1989253760.0000
+    0:01:01   17747.4      0.79      76.8      58.4                           1989253760.0000
+    0:01:15   18671.2      0.33      22.6      68.3                           2080923904.0000
+    0:01:15   18671.2      0.33      22.6      68.3                           2080923904.0000
+    0:01:15   18669.9      0.28      15.7      67.3                           2101203072.0000
+    0:01:15   18669.9      0.28      15.7      67.3                           2101203072.0000
+    0:01:15   18669.9      0.27      14.9      67.3                           2101203072.0000
+    0:01:15   18669.9      0.27      14.9      67.3                           2101203072.0000
+    0:01:17   18770.3      0.00       0.0      67.8                           2168828160.0000
+    0:01:17   18770.3      0.00       0.0      67.8                           2168828160.0000
+    0:01:17   18770.3      0.00       0.0      67.8                           2168828160.0000
+    0:01:17   18770.3      0.00       0.0      67.8                           2168828160.0000
+    0:01:17   18770.3      0.00       0.0      67.8                           2168828160.0000
+    0:01:17   18770.3      0.00       0.0      67.8                           2168828160.0000
+    0:01:17   18770.3      0.00       0.0      67.8                           2168828160.0000
+    0:01:17   18770.3      0.00       0.0      67.8                           2168828160.0000
+    0:01:17   18770.3      0.00       0.0      67.8                           2168828160.0000
+    0:01:17   18770.3      0.00       0.0      67.8                           2168828160.0000
+    0:01:17   18770.3      0.00       0.0      67.8                           2168828160.0000
+
+
+  Beginning Design Rule Fixing  (max_transition)  (max_capacitance)
+  ----------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:01:17   18770.3      0.00       0.0      67.8                           2168828160.0000
+  Global Optimization (Phase 32)
+  Global Optimization (Phase 33)
+  Global Optimization (Phase 34)
+    0:01:18   18781.5      0.00       0.0       0.0                           2158032896.0000
+    0:01:18   18781.5      0.00       0.0       0.0                           2158032896.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 3.37%, saed32cell_lvt 79.22%, saed32cell_svt 17.41%
+
+
+  Beginning Leakage Power Optimization  (max_leakage_power 0)
+  ------------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:01:18   18781.5      0.00       0.0       0.0                           2158032896.0000
+  Global Optimization (Phase 35)
+  Global Optimization (Phase 36)
+  Global Optimization (Phase 37)
+  Global Optimization (Phase 38)
+  Global Optimization (Phase 39)
+  Global Optimization (Phase 40)
+  Global Optimization (Phase 41)
+  Global Optimization (Phase 42)
+  Global Optimization (Phase 43)
+  Global Optimization (Phase 44)
+  Global Optimization (Phase 45)
+  Global Optimization (Phase 46)
+  Global Optimization (Phase 47)
+  Global Optimization (Phase 48)
+  Global Optimization (Phase 49)
+  Global Optimization (Phase 50)
+    0:01:23   18563.2      0.61      69.2       0.0 dbg_0/mem_cnt_reg[11]/D   1373255680.0000
+    0:01:23   18586.1      0.51      54.8       0.0                           1389668736.0000
+    0:01:34   18880.1      0.27      24.9      10.1                           1445138304.0000
+    0:01:34   18880.1      0.27      24.9      10.1                           1445138304.0000
+    0:01:35   18477.8      0.27      17.9       1.1                           1392088064.0000
+    0:01:35   18477.8      0.27      17.9       1.1                           1392088064.0000
+    0:01:36   18489.7      0.27      14.4       2.4                           1393313024.0000
+    0:01:36   18489.7      0.27      14.4       2.4                           1393313024.0000
+    0:01:36   18485.2      0.11       3.5       2.6                           1423651968.0000
+    0:01:36   18485.2      0.11       3.5       2.6                           1423651968.0000
+    0:01:45   18685.7      0.00       0.0       3.6                           1452403328.0000
+    0:01:45   18685.7      0.00       0.0       3.6                           1452403328.0000
+    0:01:45   18685.7      0.00       0.0       3.6                           1452403328.0000
+    0:01:45   18685.7      0.00       0.0       3.6                           1452403328.0000
+    0:01:45   18685.7      0.00       0.0       3.6                           1452403328.0000
+    0:01:45   18685.7      0.00       0.0       3.6                           1452403328.0000
+    0:01:45   18685.7      0.00       0.0       3.6                           1452403328.0000
+    0:01:45   18685.7      0.00       0.0       3.6                           1452403328.0000
+    0:01:45   18685.7      0.00       0.0       3.6                           1452403328.0000
+    0:01:45   18685.7      0.00       0.0       3.6                           1452403328.0000
+    0:01:45   18685.7      0.00       0.0       3.6                           1452403328.0000
+    0:01:45   18685.7      0.00       0.0       3.6                           1452403328.0000
+    0:01:45   18685.7      0.00       0.0       3.6                           1452403328.0000
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:01:45   18699.7      0.00       0.0       3.6                           1452420480.0000
+    0:01:47   18044.0      0.11       1.5       1.6                           1233170688.0000
+    0:01:48   18054.4      0.01       0.0       3.1                           1250641536.0000
+    0:01:48   18054.4      0.01       0.0       3.1                           1250641536.0000
+    0:01:48   18057.7      0.01       0.0       3.1                           1214430848.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 8.43%, saed32cell_lvt 44.72%, saed32cell_svt 46.85%
+
+  Beginning Delay Optimization HSVT Pass
+  --------------------------------------
+    0:01:49   18057.7      0.01       0.0       3.1                           1214430848.0000
+    0:01:49   18057.7      0.01       0.0       3.1                           1214430848.0000
+    0:01:49   18057.7      0.01       0.0       3.1                           1214430848.0000
+    0:01:53   18054.4      0.00       0.0       3.1                           1214337152.0000
+    0:01:54   18054.4      0.00       0.0       3.1                           1214337152.0000
+    0:01:54   18054.4      0.00       0.0       3.1                           1214337152.0000
+    0:01:54   18054.4      0.00       0.0       3.1                           1214337152.0000
+    0:01:55   18054.4      0.00       0.0       3.1                           1214337152.0000
+    0:01:58   18019.3      0.00       0.0       0.0                           1171708288.0000
+    0:01:58   18019.6      0.00       0.0       0.0                           1174901120.0000
+    0:01:58   18019.6      0.00       0.0       0.0                           1174901120.0000
+    0:01:58   18019.6      0.00       0.0       0.0                           1174901120.0000
+    0:01:58   18019.6      0.00       0.0       0.0                           1174901120.0000
+    0:01:58   18019.6      0.00       0.0       0.0                           1174901120.0000
+    0:01:59   17961.9      0.00       0.0       0.0                           1158944384.0000
+CPU Load: 59%, Ram Free: 183 GB, Swap Free: 3 GB, Work Disk Free: 3805 GB, Tmp Disk Free: 224 GB
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_rvt/db_nldm/saed32rvt_ss0p75v125c.db'
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_lvt/db_nldm/saed32lvt_ss0p75v125c.db'
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_hvt/db_nldm/saed32hvt_ss0p75v125c.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: State dependent leakage is now switched from off to on.
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+CPU Load: 55%, Ram Free: 183 GB, Swap Free: 3 GB, Work Disk Free: 3805 GB, Tmp Disk Free: 224 GB
+Information: Total number of MV cells in the design.
+----------------------------------------------------------------------------------------------------
+ MV Cells                                           Total Number                                   
+----------------------------------------------------------------------------------------------------
+ Level Shifter:                                     0                                             
+ Enable Level Shifter:                              0                                             
+ Isolation Cell:                                    0                                             
+ Retention Cell:                                    0                                             
+ Retention Clamp Cell:                              0                                             
+ Switch Cell:                                       0                                             
+ Always-On Cell:                                    0                                             
+ Repeater Cell:                                     0                                             
+
+----------------------------------------------------------------------------------------------------
+Unmapped MV Cells 
+----------------------------------------------------------------------------------------------------
+0 Isolation Cells are unmapped 
+0 Retention Clamp Cells are unmapped 
+----------------------------------------------------------------------------------------------------
+Information: Updating design information... (UID-85)
+SWEEP: period=3.6 ns, worst_slack=0.000271797
+Information: Failed to find dw_foundation.sldb in the user defined search_path, load it from 'Synopsys Root'. (UISN-70)
+Warning: DesignWare synthetic library dw_foundation.sldb is added to the synthetic_library in the current command. (UISN-40)
+Information: Starting from 2013.12 release, constant propagation is enabled even when boundary optimization is disabled. (OPT-1318)
+Information: Performing leakage power optimization. (PWR-850)
+CPU Load: 55%, Ram Free: 183 GB, Swap Free: 3 GB, Work Disk Free: 3805 GB, Tmp Disk Free: 224 GB
+Alib files are up-to-date.
+====================================================================================================
+| Flow Information                                                                                 |
+----------------------------------------------------------------------------------------------------
+| Flow         | Design Compiler WLM                                                               |
+| Command Line | compile_ultra -gate_clock                                                         |
+====================================================================================================
+| Design Information                                      | Value                                  |
+====================================================================================================
+| Number of Scenarios                                     | 0                                      |
+| Leaf Cell Count                                         | 6205                                   |
+| Number of User Hierarchies                              | 44                                     |
+| Sequential Cell Count                                   | 728                                    |
+| Macro Count                                             | 0                                      |
+| Pad Count                                               | 0                                      |
+| Number of Power Domains                                 | 0                                      |
+| Number of Path Groups                                   | 3                                      |
+| Number of VT Class                                      | 3                                      |
+| Number of Clocks                                        | 1                                      |
+| Number of Dont Touch Cells                              | 0                                      |
+| Number of Dont Touch Nets                               | 0                                      |
+| Number of Size Only Cells                               | 47                                     |
+| Design with Target Library Subset (with clock_path)     | false  (false )                        |
+| Design with UPF Data                                    | false                                  |
+----------------------------------------------------------------------------------------------------
+| Variables                                               | Value                                  |
+----------------------------------------------------------------------------------------------------
+| set_fix_multiple_port_nets                              | -all -buffer_constants                 |
+====================================================================================================
+Information: Sequential output inversion is enabled.  SVF file must be used for formal verification. (OPT-1208)
+
+Information: There are 64 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+  Simplifying Design 'openMSP430'
+
+Warning: The derived toggle-rate value (0.625000) for the clock net 'dco_clk' conflicts with the annotated value (0.555556). Using the set_switching_activity value. (PWR-12)
+Information: Ungrouping 0 of 45 hierarchies before Pass 1 (OPT-775)
+CPU Load: 51%, Ram Free: 184 GB, Swap Free: 3 GB, Work Disk Free: 3805 GB, Tmp Disk Free: 224 GB
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'openMSP430'
+  Processing 'SNPS_CLOCK_GATE_HIGH_openMSP430_2'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_5'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_register_file_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_register_file_14'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_dbg_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_dbg_2'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_multiplier_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_multiplier_3'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_watchdog_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_watchdog_1'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_mem_backbone'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_1'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_frontend_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_frontend_3'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_clock_module_0'
+  Processing 'SNPS_CLOCK_GATE_HIGH_omsp_clock_module_3'
+CPU Load: 48%, Ram Free: 184 GB, Swap Free: 3 GB, Work Disk Free: 3805 GB, Tmp Disk Free: 224 GB
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+Information: The library cell 'PMT3_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT3_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT3_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The target library(s) contains cell(s), other than black boxes, that are not characterized for internal power. (PWR-24)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_mem_backbone, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_watchdog_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_watchdog_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_14, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_13, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_5, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_4, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_openMSP430_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_openMSP430_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_openMSP430_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_4, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_5, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_6, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_7, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_8, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_9, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_10, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_11, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_12, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_1, since there are no registers. (PWR-806)
+Information: Performing clock-gating on design openMSP430. (PWR-730)
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 85.77%, saed32cell_lvt 3.92%, saed32cell_svt 10.31%
+
+  Beginning Mapping Optimizations  (Ultra High effort)
+  -------------------------------
+  Mapping Optimization (Phase 1)
+  Mapping Optimization (Phase 2)
+  Mapping Optimization (Phase 3)
+  Mapping Optimization (Phase 4)
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:36   19441.8      1.07     181.0      46.1                           2277537792.0000
+    0:00:36   19375.4      1.11     190.2      48.8                           2269967104.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 0.81%, saed32cell_lvt 92.25%, saed32cell_svt 6.94%
+
+  Beginning Constant Register Removal
+  -----------------------------------
+    0:00:36   19402.9      1.11     190.2      48.8                           2277393408.0000
+    0:00:37   19376.7      1.14     191.2      48.8                           2273688576.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 0.81%, saed32cell_lvt 92.24%, saed32cell_svt 6.95%
+
+  Beginning Global Optimizations
+  ------------------------------
+  Numerical Synthesis (Phase 1)
+  Numerical Synthesis (Phase 2)
+  Global Optimization (Phase 1)
+  Global Optimization (Phase 2)
+  Global Optimization (Phase 3)
+  Global Optimization (Phase 4)
+  Global Optimization (Phase 5)
+  Global Optimization (Phase 6)
+  Global Optimization (Phase 7)
+  Global Optimization (Phase 8)
+  Global Optimization (Phase 9)
+  Global Optimization (Phase 10)
+  Global Optimization (Phase 11)
+  Global Optimization (Phase 12)
+  Global Optimization (Phase 13)
+  Global Optimization (Phase 14)
+  Global Optimization (Phase 15)
+  Global Optimization (Phase 16)
+  Global Optimization (Phase 17)
+  Global Optimization (Phase 18)
+  Global Optimization (Phase 19)
+  Global Optimization (Phase 20)
+  Global Optimization (Phase 21)
+  Global Optimization (Phase 22)
+  Global Optimization (Phase 23)
+  Global Optimization (Phase 24)
+  Global Optimization (Phase 25)
+  Global Optimization (Phase 26)
+  Global Optimization (Phase 27)
+  Global Optimization (Phase 28)
+  Global Optimization (Phase 29)
+  Global Optimization (Phase 30)
+  Global Optimization (Phase 31)
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 18.50%, saed32cell_lvt 80.48%, saed32cell_svt 1.02%
+
+  Beginning Isolate Ports
+  -----------------------
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 18.50%, saed32cell_lvt 80.48%, saed32cell_svt 1.02%
+
+  Beginning Delay Optimization
+  ----------------------------
+    0:00:41   17873.4     48.33    3625.2      60.9                           1430523520.0000
+    0:00:50   17844.2      3.09    1075.8      31.4                           1864280960.0000
+    0:00:50   17844.2      3.09    1075.8      31.4                           1864280960.0000
+    0:00:51   17857.9      3.08    1031.2      29.1                           1893054976.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 7.90%, saed32cell_lvt 91.44%, saed32cell_svt 0.66%
+    0:00:51   17857.9      3.08    1031.2      29.1                           1893054976.0000
+    0:00:52   17857.2      3.08    1031.2      29.1                           1892791936.0000
+
+  Beginning WLM Backend Optimization
+  --------------------------------------
+    0:00:54   17624.1      3.08    1026.2      22.1                           1866613632.0000
+    0:00:56   17630.5      1.94     276.5      22.4                           2218414848.0000
+    0:00:56   17630.5      1.94     276.5      22.4                           2218414848.0000
+    0:00:56   17610.1      1.94     275.1      21.9                           2102027392.0000
+    0:00:56   17610.1      1.94     275.1      21.9                           2102027392.0000
+    0:01:12   18478.8      1.38     190.5      20.0                           2192961536.0000
+    0:01:13   18478.8      1.38     190.5      20.0                           2192961536.0000
+    0:01:13   18451.6      0.80      77.9      17.8                           2294186496.0000
+    0:01:13   18451.6      0.80      77.9      17.8                           2294186496.0000
+    0:01:20   18766.2      0.68      57.9      21.9                           2326791424.0000
+    0:01:20   18766.2      0.68      57.9      21.9                           2326791424.0000
+    0:01:32   18963.5      0.30      11.4      17.8                           2434349568.0000
+    0:01:32   18963.5      0.30      11.4      17.8                           2434349568.0000
+    0:01:39   18979.7      0.29      11.4      18.3                           2435351808.0000
+    0:01:39   18979.7      0.29      11.4      18.3                           2435351808.0000
+    0:01:40   19005.7      0.29      11.2      18.3                           2440403968.0000
+    0:01:40   19005.7      0.29      11.2      18.3                           2440403968.0000
+    0:01:54   19230.6      0.27       9.3      19.8                           2451513600.0000
+    0:01:54   19230.6      0.27       9.3      19.8                           2451513600.0000
+    0:01:59   19312.9      0.21       5.8      19.7                           2479867904.0000
+    0:01:59   19312.9      0.21       5.8      19.7                           2479867904.0000
+    0:02:01   19312.9      0.21       5.8      19.7                           2479867904.0000
+
+
+  Beginning Design Rule Fixing  (max_transition)  (max_capacitance)
+  ----------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:02:01   19312.9      0.21       5.8      19.7                           2479867904.0000
+  Global Optimization (Phase 32)
+  Global Optimization (Phase 33)
+  Global Optimization (Phase 34)
+    0:02:01   19299.2      0.21       5.3       0.0                           2433269504.0000
+    0:02:02   19300.2      0.20       5.3       8.5                           2432914176.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 2.59%, saed32cell_lvt 90.83%, saed32cell_svt 6.57%
+
+
+  Beginning Leakage Power Optimization  (max_leakage_power 0)
+  ------------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:02:02   19300.2      0.20       5.3       8.5                           2432914176.0000
+  Global Optimization (Phase 35)
+  Global Optimization (Phase 36)
+  Global Optimization (Phase 37)
+  Global Optimization (Phase 38)
+  Global Optimization (Phase 39)
+  Global Optimization (Phase 40)
+  Global Optimization (Phase 41)
+  Global Optimization (Phase 42)
+  Global Optimization (Phase 43)
+  Global Optimization (Phase 44)
+  Global Optimization (Phase 45)
+  Global Optimization (Phase 46)
+  Global Optimization (Phase 47)
+  Global Optimization (Phase 48)
+  Global Optimization (Phase 49)
+  Global Optimization (Phase 50)
+    0:02:06   18653.9      0.20       8.1       0.0 mem_backbone_0/clk_gate_pmem_dout_bckup_reg/latch/EN 1523537792.0000
+    0:02:07   18665.6      0.19       6.9       0.0                           1533333376.0000
+    0:02:23   19008.2      0.13       3.4       0.3                           1566405504.0000
+    0:02:23   19008.2      0.13       3.4       0.3                           1566405504.0000
+    0:02:24   18600.0      0.13       3.0       0.3                           1496293504.0000
+    0:02:24   18600.0      0.13       3.0       0.3                           1496293504.0000
+    0:02:28   18609.7      0.13       3.0       0.3                           1496503552.0000
+    0:02:28   18609.7      0.13       3.0       0.3                           1496503552.0000
+    0:02:28   18610.7      0.12       2.9       0.3                           1498011904.0000
+    0:02:28   18610.7      0.12       2.9       0.3                           1498011904.0000
+    0:02:31   18619.1      0.12       2.8       0.3                           1498103040.0000
+    0:02:31   18619.1      0.12       2.8       0.3                           1498103040.0000
+    0:02:35   18713.6      0.07       1.5       0.6                           1530600576.0000
+    0:02:35   18713.6      0.07       1.5       0.6                           1530600576.0000
+    0:02:36   18713.6      0.07       1.5       0.6                           1530600576.0000
+    0:02:36   18713.6      0.07       1.5       0.6                           1530600576.0000
+    0:02:37   18713.6      0.07       1.5       0.6                           1530600576.0000
+    0:02:37   18713.6      0.07       1.5       0.6                           1530600576.0000
+    0:02:38   18713.6      0.07       1.5       0.6                           1530600576.0000
+    0:02:38   18713.6      0.07       1.5       0.6                           1530600576.0000
+    0:02:38   18713.6      0.07       1.5       0.6                           1530600576.0000
+    0:02:38   18713.6      0.07       1.5       0.6                           1530600576.0000
+    0:02:39   18713.6      0.07       1.5       0.6                           1530600576.0000
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:02:40   18727.6      0.07       1.5       0.6                           1530617728.0000
+    0:02:41   18154.8      0.11       2.2      28.1                           1398147584.0000
+    0:02:43   18129.6      0.07       1.5      28.1                           1404171904.0000
+    0:02:43   18129.6      0.07       1.5      28.1                           1404171904.0000
+    0:02:43   18130.1      0.07       1.5      28.1                           1394789248.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 8.18%, saed32cell_lvt 54.41%, saed32cell_svt 37.41%
+
+  Beginning Delay Optimization HSVT Pass
+  --------------------------------------
+    0:02:44   18130.1      0.07       1.5      28.1                           1394789248.0000
+    0:02:44   18130.1      0.07       1.5      28.1                           1394789248.0000
+    0:02:44   18130.1      0.07       1.5      28.1                           1394789248.0000
+    0:04:19   18122.5      0.07       1.2      28.1                           1394632064.0000
+    0:04:20   18122.5      0.07       1.2      28.1                           1394632064.0000
+    0:04:20   18122.5      0.07       1.2      28.1                           1394632064.0000
+    0:04:20   18122.5      0.07       1.2      28.1                           1394632064.0000
+    0:04:21   18143.8      0.07       1.2      28.1                           1401463168.0000
+    0:04:24   18147.4      0.05       1.0       0.0 mem_backbone_0/per_dout_val_reg[14]/D 1372779520.0000
+    0:04:25   18222.9      0.03       0.5       0.0 mem_backbone_0/per_dout_val_reg[14]/D 1397930368.0000
+    0:04:25   18223.1      0.03       0.5       0.0                           1398184576.0000
+    0:04:28   18233.1      0.01       0.1       0.0                           1410467200.0000
+    0:04:28   18233.1      0.01       0.1       0.0                           1410467200.0000
+    0:04:28   18233.1      0.01       0.1       0.0                           1410262656.0000
+    0:04:28   18233.1      0.01       0.1       0.0                           1410262656.0000
+    0:04:28   18233.3      0.01       0.1       0.0                           1410400768.0000
+    0:04:29   18109.5      0.01       0.1       0.0                           1354639744.0000
+CPU Load: 25%, Ram Free: 183 GB, Swap Free: 3 GB, Work Disk Free: 3806 GB, Tmp Disk Free: 224 GB
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_rvt/db_nldm/saed32rvt_ss0p75v125c.db'
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_lvt/db_nldm/saed32lvt_ss0p75v125c.db'
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_hvt/db_nldm/saed32hvt_ss0p75v125c.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: State dependent leakage is now switched from off to on.
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+CPU Load: 24%, Ram Free: 183 GB, Swap Free: 3 GB, Work Disk Free: 3806 GB, Tmp Disk Free: 224 GB
+Information: Total number of MV cells in the design.
+----------------------------------------------------------------------------------------------------
+ MV Cells                                           Total Number                                   
+----------------------------------------------------------------------------------------------------
+ Level Shifter:                                     0                                             
+ Enable Level Shifter:                              0                                             
+ Isolation Cell:                                    0                                             
+ Retention Cell:                                    0                                             
+ Retention Clamp Cell:                              0                                             
+ Switch Cell:                                       0                                             
+ Always-On Cell:                                    0                                             
+ Repeater Cell:                                     0                                             
+
+----------------------------------------------------------------------------------------------------
+Unmapped MV Cells 
+----------------------------------------------------------------------------------------------------
+0 Isolation Cells are unmapped 
+0 Retention Clamp Cells are unmapped 
+----------------------------------------------------------------------------------------------------
+Information: Updating design information... (UID-85)
+SWEEP: period=3.2 ns, worst_slack=-0.00769639
+SWEEP: negative slack at period=3.2 ? stop, Fmax = 3.6 ns
+if {$best_period eq ""} {
+  puts "ERROR: no non-negative slack point found in sweep."
+  exit 2
+}
+set clks [all_clocks]
+{dco_clk}
+if {[llength $clks] > 0} {
+  foreach c $clks {
+    remove_clock $c
+  }
+}
+create_clock -period $best_period -name dco_clk [get_ports dco_clk]
+1
+compile_ultra -gate_clock -incremental
+Information: Failed to find dw_foundation.sldb in the user defined search_path, load it from 'Synopsys Root'. (UISN-70)
+Warning: DesignWare synthetic library dw_foundation.sldb is added to the synthetic_library in the current command. (UISN-40)
+Information: Starting from 2013.12 release, constant propagation is enabled even when boundary optimization is disabled. (OPT-1318)
+Information: Performing leakage power optimization. (PWR-850)
+CPU Load: 24%, Ram Free: 183 GB, Swap Free: 3 GB, Work Disk Free: 3806 GB, Tmp Disk Free: 224 GB
+Alib files are up-to-date.
+====================================================================================================
+| Flow Information                                                                                 |
+----------------------------------------------------------------------------------------------------
+| Flow         | Design Compiler                                                                   |
+| Command Line | compile_ultra -incremental -gate_clock                                            |
+====================================================================================================
+| Design Information                                      | Value                                  |
+====================================================================================================
+| Number of Scenarios                                     | 0                                      |
+| Leaf Cell Count                                         | 6371                                   |
+| Number of User Hierarchies                              | 45                                     |
+| Sequential Cell Count                                   | 729                                    |
+| Macro Count                                             | 0                                      |
+| Pad Count                                               | 0                                      |
+| Number of Power Domains                                 | 0                                      |
+| Number of Path Groups                                   | 3                                      |
+| Number of VT Class                                      | 3                                      |
+| Number of Clocks                                        | 1                                      |
+| Number of Dont Touch Cells                              | 0                                      |
+| Number of Dont Touch Nets                               | 0                                      |
+| Number of Size Only Cells                               | 48                                     |
+| Design with Target Library Subset (with clock_path)     | false  (false )                        |
+| Design with UPF Data                                    | false                                  |
+----------------------------------------------------------------------------------------------------
+| Variables                                               | Value                                  |
+----------------------------------------------------------------------------------------------------
+| set_fix_multiple_port_nets                              | -all -buffer_constants                 |
+====================================================================================================
+
+Information: There are 65 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+Warning: The derived toggle-rate value (0.555556) for the clock net 'dco_clk' conflicts with the annotated value (0.625000). Using the set_switching_activity value. (PWR-12)
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping  (Incremental)
+  ------------------------
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+Information: The library cell 'PMT3_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_RVT' in the library 'saed32rvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT3_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_LVT' in the library 'saed32lvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT3_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_HVT' in the library 'saed32hvt_ss0p75v125c' is not characterized for internal power. (PWR-536)
+Information: The target library(s) contains cell(s), other than black boxes, that are not characterized for internal power. (PWR-24)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_execution_unit_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_mem_backbone, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_watchdog_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_watchdog_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_14, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_13, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_5, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_4, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_openMSP430_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_uart_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_4, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_5, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_6, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_7, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_8, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_9, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_10, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_11, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_register_file_12, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_dbg_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_multiplier_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_frontend_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_0, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_omsp_clock_module_1, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_openMSP430_3, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_openMSP430_2, since there are no registers. (PWR-806)
+Information: Skipping clock gating on design SNPS_CLOCK_GATE_HIGH_openMSP430_1, since there are no registers. (PWR-806)
+Information: Performing clock-gating on design openMSP430. (PWR-730)
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:04   18121.2      0.97       1.0       0.6                           1354803328.0000
+    0:00:04   18124.3      0.92       0.9       0.6                           1354857984.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 8.72%, saed32cell_lvt 52.66%, saed32cell_svt 38.61%
+
+  Beginning Mapping Optimizations  (Ultra High effort)  (Incremental)
+  -------------------------------
+
+  Beginning Incremental Implementation Selection
+  ----------------------------------------------
+    0:00:06   19490.3     39.71   13074.0     113.3                           447193536.0000
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:06   19490.3     39.71   13074.0     113.3                           447193536.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 89.47%, saed32cell_lvt 3.52%, saed32cell_svt 7.01%
+
+  Beginning Delay Optimization HSVT Pass
+  --------------------------------------
+    0:00:09   19488.3     39.71   13074.0     113.3                           447191328.0000
+    0:00:09   19488.3     39.71   13074.0     113.3                           447191328.0000
+    0:00:09   19488.3     39.71   13074.0     113.3                           447191328.0000
+    0:00:10   19817.1     34.87   12982.0     113.2                           460330240.0000
+    0:00:11   19817.1     34.87   12982.0     113.2                           460330240.0000
+    0:00:11   19817.1     34.87   12982.0     113.2                           460330240.0000
+    0:00:11   19817.1     34.87   12982.0     113.2                           460330240.0000
+    0:00:11   19944.7     25.82   10290.9     124.9                           477216352.0000
+    0:00:13   19944.7     25.82   10290.9     124.9                           477216352.0000
+    0:00:14   19768.6     25.82    9486.1     143.0                           512748576.0000
+    0:00:14   19768.6     25.82    9486.1     143.0                           512748576.0000
+    0:00:14   19768.6     25.82    9486.1     143.0                           512748576.0000
+    0:00:14   19768.6     25.82    9486.1     143.0                           512748576.0000
+    0:00:21   22189.3      5.96    2158.5     284.1                           1243649408.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 35.12%, saed32cell_lvt 40.85%, saed32cell_svt 24.03%
+
+  Beginning Delay Optimization
+  ----------------------------
+    0:00:21   22186.0      5.95    2157.2     285.3                           1262393088.0000
+    0:01:00   20726.0      0.30      30.3     229.1                           1837206016.0000
+    0:01:00   20726.0      0.30      30.3     229.1                           1837206016.0000
+    0:01:10   20726.0      0.30      30.3     229.1                           1837206016.0000
+    0:01:10   20726.0      0.30      30.3     229.1                           1837206016.0000
+    0:01:11   20688.8      0.30      30.9     263.3                           1735751424.0000
+
+
+  Beginning Design Rule Fixing  (max_transition)  (max_capacitance)
+  ----------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:01:11   20688.8      0.30      30.9     263.3                           1735751424.0000
+    0:01:13   20530.5      0.27      27.9       5.2 multiplier_0/reslo_reg[6]/D 1692536576.0000
+    0:01:15   20532.3      0.16      12.7       5.7 execution_unit_0/register_file_0/r8_reg[11]/D 1678984448.0000
+    0:01:17   20573.2      0.11       7.5       3.3 execution_unit_0/register_file_0/r14_reg[15]/D 1676189056.0000
+    0:01:18   20604.7      0.09       5.1       3.0                           1675428736.0000
+    0:01:19   19783.6      0.09       4.0       0.0                           1554474624.0000
+    0:01:19   19783.6      0.09       4.0       0.0                           1554474624.0000
+    0:01:19   19783.1      0.09       4.0       0.0                           1553970048.0000
+    0:01:19   19783.1      0.09       4.0       0.0                           1553970048.0000
+    0:01:21   19937.9      0.00       0.0      44.5                           1574580352.0000
+    0:01:21   19937.9      0.00       0.0      44.5                           1574580352.0000
+    0:01:21   19937.9      0.00       0.0      44.5                           1574580352.0000
+    0:01:21   19937.9      0.00       0.0      44.5                           1574580352.0000
+    0:01:21   19937.9      0.00       0.0      44.5                           1574580352.0000
+    0:01:21   19937.9      0.00       0.0      44.5                           1574580352.0000
+    0:01:22   19810.3      0.00       0.0      44.5                           1523870464.0000
+    0:01:22   19810.3      0.00       0.0      44.5                           1523870464.0000
+    0:01:22   19810.0      0.00       0.0      44.5                           1524731392.0000
+    0:01:22   19810.0      0.00       0.0      44.5                           1524731392.0000
+    0:01:22   19810.0      0.00       0.0      44.5                           1524731392.0000
+    0:01:22   19810.0      0.00       0.0      44.5                           1524731392.0000
+    0:01:22   19810.0      0.00       0.0      44.5                           1524731392.0000
+    0:01:22   19810.0      0.00       0.0      44.5                           1524731392.0000
+    0:01:22   19810.0      0.00       0.0      44.5                           1524731392.0000
+    0:01:22   19824.0      0.00       0.0      44.5                           1524748416.0000
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:01:22   24759.1      0.00       0.0      44.5                           1524748416.0000
+    0:01:22   24752.2      0.00       0.0      44.5                           1521209088.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_hvt 13.41%, saed32cell_lvt 52.66%, saed32cell_svt 33.94%
+
+  Beginning Delay Optimization HSVT Pass
+  --------------------------------------
+    0:01:23   24752.2      0.00       0.0      44.5                           1521209088.0000
+    0:01:23   24752.2      0.00       0.0      44.5                           1521209088.0000
+    0:01:23   24752.2      0.00       0.0      44.5                           1521209088.0000
+    0:01:23   24752.2      0.00       0.0      44.5                           1521209088.0000
+    0:01:24   24752.2      0.00       0.0      44.5                           1521209088.0000
+    0:01:24   24752.2      0.00       0.0      44.5                           1521209088.0000
+    0:01:24   24752.2      0.00       0.0      44.5                           1521209088.0000
+    0:01:24   24752.2      0.00       0.0      44.5                           1521209088.0000
+    0:01:30   24009.6      0.00       0.0       0.0                           1339292672.0000
+    0:01:31   23788.2      0.00       0.0       0.0                           1241446272.0000
+    0:01:31   23788.2      0.00       0.0       0.0                           1241446272.0000
+    0:01:31   23788.2      0.00       0.0       0.0                           1241446272.0000
+    0:01:31   23788.2      0.00       0.0       0.0                           1241446272.0000
+    0:01:31   23782.6      0.00       0.0       0.0                           1239124352.0000
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_rvt/db_nldm/saed32rvt_ss0p75v125c.db'
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_lvt/db_nldm/saed32lvt_ss0p75v125c.db'
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_hvt/db_nldm/saed32hvt_ss0p75v125c.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: State dependent leakage is now switched from off to on.
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+CPU Load: 10%, Ram Free: 183 GB, Swap Free: 3 GB, Work Disk Free: 3807 GB, Tmp Disk Free: 224 GB
+Information: Total number of MV cells in the design.
+----------------------------------------------------------------------------------------------------
+ MV Cells                                           Total Number                                   
+----------------------------------------------------------------------------------------------------
+ Level Shifter:                                     0                                             
+ Enable Level Shifter:                              0                                             
+ Isolation Cell:                                    0                                             
+ Retention Cell:                                    0                                             
+ Retention Clamp Cell:                              0                                             
+ Switch Cell:                                       0                                             
+ Always-On Cell:                                    0                                             
+ Repeater Cell:                                     0                                             
+
+----------------------------------------------------------------------------------------------------
+Unmapped MV Cells 
+----------------------------------------------------------------------------------------------------
+0 Isolation Cells are unmapped 
+0 Retention Clamp Cells are unmapped 
+----------------------------------------------------------------------------------------------------
+1
+set fmax_mhz [expr {1000.0 / $best_period}]
+277.777777778
+puts "FINAL: best_period=${best_period}ns, Fmax=${fmax_mhz}MHz, slack=${best_slack}"
+FINAL: best_period=3.6ns, Fmax=277.777777778MHz, slack=0.000271797
+report_timing -significant_digits 4 -max_paths 10 > reports/timing_maxfreq.rpt
+report_area -hierarchy > reports/area_maxfreq.rpt
+report_power > reports/power_maxfreq.rpt
+write_sdc -nosplit constraints_maxfreq.sdc
+1
+write -format verilog -hierarchy -output netlist_maxfreq.v
+Writing verilog file '/home/cegrad/xhuan230/cs220/midterm-team-5/syn/netlist_maxfreq.v'.
+Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
+1
+write_sdf -version 2.1 netlist_maxfreq.sdf
+Information: Annotated 'cell' delays are assumed to include load delay. (UID-282)
+Information: Writing timing information to file '/home/cegrad/xhuan230/cs220/midterm-team-5/syn/netlist_maxfreq.sdf'. (WT-3)
+1
+exit
+
+Memory usage for this session 461 Mbytes.
+Memory usage for this session including child processes 461 Mbytes.
+CPU usage for this session 570 seconds ( 0.16 hours ).
+Elapsed time for this session 579 seconds ( 0.16 hours ).
+
+Thank you...

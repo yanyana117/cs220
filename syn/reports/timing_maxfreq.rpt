@@ -1,0 +1,669 @@
+Information: Updating design information... (UID-85)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 10
+Design : openMSP430
+Version: W-2024.09-SP5-4
+Date   : Tue May  5 23:35:29 2026
+****************************************
+
+Operating Conditions: ss0p75v125c   Library: saed32rvt_ss0p75v125c
+Wire Load Model Mode: enclosed
+
+  Startpoint: frontend_0/e_state_reg[0]
+              (rising edge-triggered flip-flop clocked by dco_clk)
+  Endpoint: mem_backbone_0/per_dout_val_reg[9]
+            (rising edge-triggered flip-flop clocked by dco_clk)
+  Path Group: dco_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  openMSP430         35000                 saed32rvt_ss0p75v125c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock dco_clk (rise edge)                             0.0000     0.0000
+  clock network delay (ideal)                           0.0000     0.0000
+  frontend_0/e_state_reg[0]/CLK (DFFARX2_LVT)           0.0000     0.0000 r
+  frontend_0/e_state_reg[0]/QN (DFFARX2_LVT)            0.1350     0.1350 f
+  U13242/Y (AND2X1_LVT)                                 0.0849     0.2199 f
+  U9791/Y (INVX1_LVT)                                   0.0350     0.2549 r
+  U12038/Y (OR3X2_LVT)                                  0.0972     0.3521 r
+  U11768/Y (INVX2_LVT)                                  0.0130     0.3651 f
+  U13674/Y (AND2X1_LVT)                                 0.0682     0.4333 f
+  U13673/Y (INVX1_LVT)                                  0.0403     0.4735 r
+  U11776/Y (NAND2X0_LVT)                                0.0412     0.5148 f
+  U13467/Y (OR3X2_LVT)                                  0.1146     0.6294 f
+  U13883/Y (INVX1_LVT)                                  0.0626     0.6920 r
+  U11291/Y (AOI22X1_LVT)                                0.0933     0.7852 f
+  U14658/Y (OA21X1_LVT)                                 0.0659     0.8511 f
+  U13416/Y (INVX1_LVT)                                  0.0296     0.8807 r
+  U13236/Y (OR3X1_LVT)                                  0.0947     0.9754 r
+  U14890/Y (XNOR2X2_LVT)                                0.1065     1.0819 f
+  U12950/Y (OR2X1_LVT)                                  0.0751     1.1570 f
+  U13218/Y (AO22X1_LVT)                                 0.0918     1.2488 f
+  U13510/Y (AND3X1_LVT)                                 0.0787     1.3275 f
+  U13415/Y (AND2X1_LVT)                                 0.0735     1.4011 f
+  U11169/Y (OR3X1_LVT)                                  0.0936     1.4947 f
+  U15723/Y (OA21X1_LVT)                                 0.0960     1.5906 f
+  U13874/Y (XNOR2X2_LVT)                                0.1216     1.7122 r
+  U10324/Y (INVX0_RVT)                                  0.0360     1.7483 f
+  U12071/Y (OR2X1_LVT)                                  0.0721     1.8204 f
+  U13020/Y (NOR4X1_LVT)                                 0.1435     1.9639 r
+  U13015/Y (AND2X1_LVT)                                 0.0550     2.0189 r
+  U13476/Y (OR2X2_LVT)                                  0.0722     2.0911 r
+  U11826/Y (MUX21X2_LVT)                                0.1138     2.2049 f
+  U10402/Y (OR4X1_RVT)                                  0.3327     2.5376 f
+  U13945/Y (OR3X1_LVT)                                  0.1008     2.6385 f
+  U15813/Y (OR2X1_LVT)                                  0.0763     2.7148 f
+  U15812/Y (OR2X1_RVT)                                  0.1069     2.8217 f
+  U15387/Y (INVX1_RVT)                                  0.0439     2.8656 r
+  U15388/Y (OR2X1_HVT)                                  0.4005     3.2660 r
+  U15391/Y (OR3X1_LVT)                                  0.1330     3.3990 r
+  U13988/Y (OR4X1_LVT)                                  0.1419     3.5409 r
+  mem_backbone_0/per_dout_val_reg[9]/D (DFFARX1_LVT)    0.0000     3.5409 r
+  data arrival time                                                3.5409
+
+  clock dco_clk (rise edge)                             3.6000     3.6000
+  clock network delay (ideal)                           0.0000     3.6000
+  mem_backbone_0/per_dout_val_reg[9]/CLK (DFFARX1_LVT)
+                                                        0.0000     3.6000 r
+  library setup time                                   -0.0589     3.5411
+  data required time                                               3.5411
+  --------------------------------------------------------------------------
+  data required time                                               3.5411
+  data arrival time                                               -3.5409
+  --------------------------------------------------------------------------
+  slack (MET)                                                      0.0002
+
+
+  Startpoint: frontend_0/e_state_reg[1]
+              (rising edge-triggered flip-flop clocked by dco_clk)
+  Endpoint: watchdog_0/wdtcnt_reg[6]
+            (rising edge-triggered flip-flop clocked by dco_clk)
+  Path Group: dco_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  openMSP430         35000                 saed32rvt_ss0p75v125c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock dco_clk (rise edge)                             0.0000     0.0000
+  clock network delay (ideal)                           0.0000     0.0000
+  frontend_0/e_state_reg[1]/CLK (DFFARX2_LVT)           0.0000     0.0000 r
+  frontend_0/e_state_reg[1]/QN (DFFARX2_LVT)            0.1520     0.1520 r
+  U11816/Y (INVX2_LVT)                                  0.0138     0.1658 f
+  U11782/Y (OR2X1_LVT)                                  0.0619     0.2277 f
+  U13417/Y (OR2X2_LVT)                                  0.0741     0.3018 f
+  U11751/Y (INVX2_LVT)                                  0.0342     0.3359 r
+  U10154/Y (OR2X1_LVT)                                  0.0649     0.4008 r
+  U10146/Y (INVX1_LVT)                                  0.0229     0.4237 f
+  U11477/Y (AO22X1_LVT)                                 0.0844     0.5081 f
+  U10132/Y (INVX1_LVT)                                  0.0427     0.5508 r
+  U12031/Y (NBUFFX2_LVT)                                0.0672     0.6180 r
+  U10617/Y (OR2X1_HVT)                                  0.4167     1.0347 r
+  U11282/Y (NAND4X0_LVT)                                0.0376     1.0723 f
+  U10816/Y (OR4X1_LVT)                                  0.1942     1.2665 f
+  U13334/Y (AO21X1_LVT)                                 0.0954     1.3618 f
+  U11030/Y (INVX0_RVT)                                  0.0584     1.4203 r
+  U12723/Y (AO22X1_LVT)                                 0.1038     1.5240 r
+  U12717/Y (INVX2_LVT)                                  0.0233     1.5474 f
+  U10527/Y (NOR2X1_LVT)                                 0.0895     1.6368 r
+  U13451/Y (OR3X1_LVT)                                  0.0921     1.7289 r
+  U9921/Y (INVX2_LVT)                                   0.0181     1.7470 f
+  U14037/Y (XNOR2X2_LVT)                                0.1149     1.8619 r
+  U9976/Y (INVX1_LVT)                                   0.0179     1.8799 f
+  U14041/Y (AND2X1_LVT)                                 0.0659     1.9458 f
+  U13015/Y (AND2X1_LVT)                                 0.0659     2.0117 f
+  U13476/Y (OR2X2_LVT)                                  0.0753     2.0870 f
+  U11174/Y (INVX4_LVT)                                  0.0452     2.1322 r
+  U11823/Y (INVX4_LVT)                                  0.0266     2.1588 f
+  U9895/Y (INVX4_LVT)                                   0.0395     2.1983 r
+  U9864/Y (MUX21X1_LVT)                                 0.1226     2.3209 f
+  U14920/Y (INVX0_LVT)                                  0.0553     2.3762 r
+  U9842/Y (OR4X1_LVT)                                   0.1397     2.5159 r
+  U13805/Y (OR3X1_LVT)                                  0.0728     2.5887 r
+  U13804/Y (AO22X2_LVT)                                 0.1201     2.7088 r
+  U13026/Y (NOR2X0_HVT)                                 0.6799     3.3888 f
+  watchdog_0/wdtcnt_reg[6]/D (DFFARX1_RVT)              0.0000     3.3888 f
+  data arrival time                                                3.3888
+
+  clock dco_clk (rise edge)                             3.6000     3.6000
+  clock network delay (ideal)                           0.0000     3.6000
+  watchdog_0/wdtcnt_reg[6]/CLK (DFFARX1_RVT)            0.0000     3.6000 r
+  library setup time                                   -0.2110     3.3890
+  data required time                                               3.3890
+  --------------------------------------------------------------------------
+  data required time                                               3.3890
+  data arrival time                                               -3.3888
+  --------------------------------------------------------------------------
+  slack (MET)                                                      0.0003
+
+
+  Startpoint: frontend_0/e_state_reg[1]
+              (rising edge-triggered flip-flop clocked by dco_clk)
+  Endpoint: watchdog_0/wdtcnt_reg[15]
+            (rising edge-triggered flip-flop clocked by dco_clk)
+  Path Group: dco_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  openMSP430         35000                 saed32rvt_ss0p75v125c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock dco_clk (rise edge)                             0.0000     0.0000
+  clock network delay (ideal)                           0.0000     0.0000
+  frontend_0/e_state_reg[1]/CLK (DFFARX2_LVT)           0.0000     0.0000 r
+  frontend_0/e_state_reg[1]/QN (DFFARX2_LVT)            0.1520     0.1520 r
+  U11816/Y (INVX2_LVT)                                  0.0138     0.1658 f
+  U11782/Y (OR2X1_LVT)                                  0.0619     0.2277 f
+  U13417/Y (OR2X2_LVT)                                  0.0741     0.3018 f
+  U11751/Y (INVX2_LVT)                                  0.0342     0.3359 r
+  U10154/Y (OR2X1_LVT)                                  0.0649     0.4008 r
+  U10146/Y (INVX1_LVT)                                  0.0229     0.4237 f
+  U11477/Y (AO22X1_LVT)                                 0.0844     0.5081 f
+  U10132/Y (INVX1_LVT)                                  0.0427     0.5508 r
+  U12031/Y (NBUFFX2_LVT)                                0.0672     0.6180 r
+  U10617/Y (OR2X1_HVT)                                  0.4167     1.0347 r
+  U11282/Y (NAND4X0_LVT)                                0.0376     1.0723 f
+  U10816/Y (OR4X1_LVT)                                  0.1942     1.2665 f
+  U13334/Y (AO21X1_LVT)                                 0.0954     1.3618 f
+  U11030/Y (INVX0_RVT)                                  0.0584     1.4203 r
+  U12723/Y (AO22X1_LVT)                                 0.1038     1.5240 r
+  U12717/Y (INVX2_LVT)                                  0.0233     1.5474 f
+  U10527/Y (NOR2X1_LVT)                                 0.0895     1.6368 r
+  U13451/Y (OR3X1_LVT)                                  0.0921     1.7289 r
+  U9921/Y (INVX2_LVT)                                   0.0181     1.7470 f
+  U14037/Y (XNOR2X2_LVT)                                0.1149     1.8619 r
+  U9976/Y (INVX1_LVT)                                   0.0179     1.8799 f
+  U14041/Y (AND2X1_LVT)                                 0.0659     1.9458 f
+  U13015/Y (AND2X1_LVT)                                 0.0659     2.0117 f
+  U13476/Y (OR2X2_LVT)                                  0.0753     2.0870 f
+  U11174/Y (INVX4_LVT)                                  0.0452     2.1322 r
+  U11823/Y (INVX4_LVT)                                  0.0266     2.1588 f
+  U9895/Y (INVX4_LVT)                                   0.0395     2.1983 r
+  U9864/Y (MUX21X1_LVT)                                 0.1226     2.3209 f
+  U14920/Y (INVX0_LVT)                                  0.0553     2.3762 r
+  U9842/Y (OR4X1_LVT)                                   0.1397     2.5159 r
+  U13805/Y (OR3X1_LVT)                                  0.0728     2.5887 r
+  U13804/Y (AO22X2_LVT)                                 0.1201     2.7088 r
+  U13028/Y (NOR2X0_HVT)                                 0.6799     3.3888 f
+  watchdog_0/wdtcnt_reg[15]/D (DFFARX1_RVT)             0.0000     3.3888 f
+  data arrival time                                                3.3888
+
+  clock dco_clk (rise edge)                             3.6000     3.6000
+  clock network delay (ideal)                           0.0000     3.6000
+  watchdog_0/wdtcnt_reg[15]/CLK (DFFARX1_RVT)           0.0000     3.6000 r
+  library setup time                                   -0.2110     3.3890
+  data required time                                               3.3890
+  --------------------------------------------------------------------------
+  data required time                                               3.3890
+  data arrival time                                               -3.3888
+  --------------------------------------------------------------------------
+  slack (MET)                                                      0.0003
+
+
+  Startpoint: frontend_0/e_state_reg[1]
+              (rising edge-triggered flip-flop clocked by dco_clk)
+  Endpoint: watchdog_0/wdtcnt_reg[11]
+            (rising edge-triggered flip-flop clocked by dco_clk)
+  Path Group: dco_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  openMSP430         35000                 saed32rvt_ss0p75v125c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock dco_clk (rise edge)                             0.0000     0.0000
+  clock network delay (ideal)                           0.0000     0.0000
+  frontend_0/e_state_reg[1]/CLK (DFFARX2_LVT)           0.0000     0.0000 r
+  frontend_0/e_state_reg[1]/QN (DFFARX2_LVT)            0.1520     0.1520 r
+  U11816/Y (INVX2_LVT)                                  0.0138     0.1658 f
+  U11782/Y (OR2X1_LVT)                                  0.0619     0.2277 f
+  U13417/Y (OR2X2_LVT)                                  0.0741     0.3018 f
+  U11751/Y (INVX2_LVT)                                  0.0342     0.3359 r
+  U10154/Y (OR2X1_LVT)                                  0.0649     0.4008 r
+  U10146/Y (INVX1_LVT)                                  0.0229     0.4237 f
+  U11477/Y (AO22X1_LVT)                                 0.0844     0.5081 f
+  U10132/Y (INVX1_LVT)                                  0.0427     0.5508 r
+  U12031/Y (NBUFFX2_LVT)                                0.0672     0.6180 r
+  U10617/Y (OR2X1_HVT)                                  0.4167     1.0347 r
+  U11282/Y (NAND4X0_LVT)                                0.0376     1.0723 f
+  U10816/Y (OR4X1_LVT)                                  0.1942     1.2665 f
+  U13334/Y (AO21X1_LVT)                                 0.0954     1.3618 f
+  U11030/Y (INVX0_RVT)                                  0.0584     1.4203 r
+  U12723/Y (AO22X1_LVT)                                 0.1038     1.5240 r
+  U12717/Y (INVX2_LVT)                                  0.0233     1.5474 f
+  U10527/Y (NOR2X1_LVT)                                 0.0895     1.6368 r
+  U13451/Y (OR3X1_LVT)                                  0.0921     1.7289 r
+  U9921/Y (INVX2_LVT)                                   0.0181     1.7470 f
+  U14037/Y (XNOR2X2_LVT)                                0.1149     1.8619 r
+  U9976/Y (INVX1_LVT)                                   0.0179     1.8799 f
+  U14041/Y (AND2X1_LVT)                                 0.0659     1.9458 f
+  U13015/Y (AND2X1_LVT)                                 0.0659     2.0117 f
+  U13476/Y (OR2X2_LVT)                                  0.0753     2.0870 f
+  U11174/Y (INVX4_LVT)                                  0.0452     2.1322 r
+  U11823/Y (INVX4_LVT)                                  0.0266     2.1588 f
+  U9895/Y (INVX4_LVT)                                   0.0395     2.1983 r
+  U9864/Y (MUX21X1_LVT)                                 0.1226     2.3209 f
+  U14920/Y (INVX0_LVT)                                  0.0553     2.3762 r
+  U9842/Y (OR4X1_LVT)                                   0.1397     2.5159 r
+  U13805/Y (OR3X1_LVT)                                  0.0728     2.5887 r
+  U13804/Y (AO22X2_LVT)                                 0.1201     2.7088 r
+  U15306/Y (NOR2X0_HVT)                                 0.6799     3.3888 f
+  watchdog_0/wdtcnt_reg[11]/D (DFFARX1_RVT)             0.0000     3.3888 f
+  data arrival time                                                3.3888
+
+  clock dco_clk (rise edge)                             3.6000     3.6000
+  clock network delay (ideal)                           0.0000     3.6000
+  watchdog_0/wdtcnt_reg[11]/CLK (DFFARX1_RVT)           0.0000     3.6000 r
+  library setup time                                   -0.2110     3.3890
+  data required time                                               3.3890
+  --------------------------------------------------------------------------
+  data required time                                               3.3890
+  data arrival time                                               -3.3888
+  --------------------------------------------------------------------------
+  slack (MET)                                                      0.0003
+
+
+  Startpoint: frontend_0/e_state_reg[1]
+              (rising edge-triggered flip-flop clocked by dco_clk)
+  Endpoint: watchdog_0/wdtcnt_reg[5]
+            (rising edge-triggered flip-flop clocked by dco_clk)
+  Path Group: dco_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  openMSP430         35000                 saed32rvt_ss0p75v125c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock dco_clk (rise edge)                             0.0000     0.0000
+  clock network delay (ideal)                           0.0000     0.0000
+  frontend_0/e_state_reg[1]/CLK (DFFARX2_LVT)           0.0000     0.0000 r
+  frontend_0/e_state_reg[1]/QN (DFFARX2_LVT)            0.1520     0.1520 r
+  U11816/Y (INVX2_LVT)                                  0.0138     0.1658 f
+  U11782/Y (OR2X1_LVT)                                  0.0619     0.2277 f
+  U13417/Y (OR2X2_LVT)                                  0.0741     0.3018 f
+  U11751/Y (INVX2_LVT)                                  0.0342     0.3359 r
+  U10154/Y (OR2X1_LVT)                                  0.0649     0.4008 r
+  U10146/Y (INVX1_LVT)                                  0.0229     0.4237 f
+  U11477/Y (AO22X1_LVT)                                 0.0844     0.5081 f
+  U10132/Y (INVX1_LVT)                                  0.0427     0.5508 r
+  U12031/Y (NBUFFX2_LVT)                                0.0672     0.6180 r
+  U10617/Y (OR2X1_HVT)                                  0.4167     1.0347 r
+  U11282/Y (NAND4X0_LVT)                                0.0376     1.0723 f
+  U10816/Y (OR4X1_LVT)                                  0.1942     1.2665 f
+  U13334/Y (AO21X1_LVT)                                 0.0954     1.3618 f
+  U11030/Y (INVX0_RVT)                                  0.0584     1.4203 r
+  U12723/Y (AO22X1_LVT)                                 0.1038     1.5240 r
+  U12717/Y (INVX2_LVT)                                  0.0233     1.5474 f
+  U10527/Y (NOR2X1_LVT)                                 0.0895     1.6368 r
+  U13451/Y (OR3X1_LVT)                                  0.0921     1.7289 r
+  U9921/Y (INVX2_LVT)                                   0.0181     1.7470 f
+  U14037/Y (XNOR2X2_LVT)                                0.1149     1.8619 r
+  U9976/Y (INVX1_LVT)                                   0.0179     1.8799 f
+  U14041/Y (AND2X1_LVT)                                 0.0659     1.9458 f
+  U13015/Y (AND2X1_LVT)                                 0.0659     2.0117 f
+  U13476/Y (OR2X2_LVT)                                  0.0753     2.0870 f
+  U11174/Y (INVX4_LVT)                                  0.0452     2.1322 r
+  U11823/Y (INVX4_LVT)                                  0.0266     2.1588 f
+  U9895/Y (INVX4_LVT)                                   0.0395     2.1983 r
+  U9864/Y (MUX21X1_LVT)                                 0.1226     2.3209 f
+  U14920/Y (INVX0_LVT)                                  0.0553     2.3762 r
+  U9842/Y (OR4X1_LVT)                                   0.1397     2.5159 r
+  U13805/Y (OR3X1_LVT)                                  0.0728     2.5887 r
+  U13804/Y (AO22X2_LVT)                                 0.1201     2.7088 r
+  U13029/Y (NOR2X0_HVT)                                 0.6799     3.3888 f
+  watchdog_0/wdtcnt_reg[5]/D (DFFARX1_RVT)              0.0000     3.3888 f
+  data arrival time                                                3.3888
+
+  clock dco_clk (rise edge)                             3.6000     3.6000
+  clock network delay (ideal)                           0.0000     3.6000
+  watchdog_0/wdtcnt_reg[5]/CLK (DFFARX1_RVT)            0.0000     3.6000 r
+  library setup time                                   -0.2109     3.3891
+  data required time                                               3.3891
+  --------------------------------------------------------------------------
+  data required time                                               3.3891
+  data arrival time                                               -3.3888
+  --------------------------------------------------------------------------
+  slack (MET)                                                      0.0003
+
+
+  Startpoint: frontend_0/e_state_reg[1]
+              (rising edge-triggered flip-flop clocked by dco_clk)
+  Endpoint: watchdog_0/wdtcnt_reg[7]
+            (rising edge-triggered flip-flop clocked by dco_clk)
+  Path Group: dco_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  openMSP430         35000                 saed32rvt_ss0p75v125c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock dco_clk (rise edge)                             0.0000     0.0000
+  clock network delay (ideal)                           0.0000     0.0000
+  frontend_0/e_state_reg[1]/CLK (DFFARX2_LVT)           0.0000     0.0000 r
+  frontend_0/e_state_reg[1]/QN (DFFARX2_LVT)            0.1520     0.1520 r
+  U11816/Y (INVX2_LVT)                                  0.0138     0.1658 f
+  U11782/Y (OR2X1_LVT)                                  0.0619     0.2277 f
+  U13417/Y (OR2X2_LVT)                                  0.0741     0.3018 f
+  U11751/Y (INVX2_LVT)                                  0.0342     0.3359 r
+  U10154/Y (OR2X1_LVT)                                  0.0649     0.4008 r
+  U10146/Y (INVX1_LVT)                                  0.0229     0.4237 f
+  U11477/Y (AO22X1_LVT)                                 0.0844     0.5081 f
+  U10132/Y (INVX1_LVT)                                  0.0427     0.5508 r
+  U12031/Y (NBUFFX2_LVT)                                0.0672     0.6180 r
+  U10617/Y (OR2X1_HVT)                                  0.4167     1.0347 r
+  U11282/Y (NAND4X0_LVT)                                0.0376     1.0723 f
+  U10816/Y (OR4X1_LVT)                                  0.1942     1.2665 f
+  U13334/Y (AO21X1_LVT)                                 0.0954     1.3618 f
+  U11030/Y (INVX0_RVT)                                  0.0584     1.4203 r
+  U12723/Y (AO22X1_LVT)                                 0.1038     1.5240 r
+  U12717/Y (INVX2_LVT)                                  0.0233     1.5474 f
+  U10527/Y (NOR2X1_LVT)                                 0.0895     1.6368 r
+  U13451/Y (OR3X1_LVT)                                  0.0921     1.7289 r
+  U9921/Y (INVX2_LVT)                                   0.0181     1.7470 f
+  U14037/Y (XNOR2X2_LVT)                                0.1149     1.8619 r
+  U9976/Y (INVX1_LVT)                                   0.0179     1.8799 f
+  U14041/Y (AND2X1_LVT)                                 0.0659     1.9458 f
+  U13015/Y (AND2X1_LVT)                                 0.0659     2.0117 f
+  U13476/Y (OR2X2_LVT)                                  0.0753     2.0870 f
+  U11174/Y (INVX4_LVT)                                  0.0452     2.1322 r
+  U11823/Y (INVX4_LVT)                                  0.0266     2.1588 f
+  U9895/Y (INVX4_LVT)                                   0.0395     2.1983 r
+  U9864/Y (MUX21X1_LVT)                                 0.1226     2.3209 f
+  U14920/Y (INVX0_LVT)                                  0.0553     2.3762 r
+  U9842/Y (OR4X1_LVT)                                   0.1397     2.5159 r
+  U13805/Y (OR3X1_LVT)                                  0.0728     2.5887 r
+  U13804/Y (AO22X2_LVT)                                 0.1201     2.7088 r
+  U15307/Y (NOR2X0_HVT)                                 0.6799     3.3888 f
+  watchdog_0/wdtcnt_reg[7]/D (DFFARX1_RVT)              0.0000     3.3888 f
+  data arrival time                                                3.3888
+
+  clock dco_clk (rise edge)                             3.6000     3.6000
+  clock network delay (ideal)                           0.0000     3.6000
+  watchdog_0/wdtcnt_reg[7]/CLK (DFFARX1_RVT)            0.0000     3.6000 r
+  library setup time                                   -0.2109     3.3891
+  data required time                                               3.3891
+  --------------------------------------------------------------------------
+  data required time                                               3.3891
+  data arrival time                                               -3.3888
+  --------------------------------------------------------------------------
+  slack (MET)                                                      0.0003
+
+
+  Startpoint: frontend_0/e_state_reg[1]
+              (rising edge-triggered flip-flop clocked by dco_clk)
+  Endpoint: watchdog_0/wdtcnt_reg[3]
+            (rising edge-triggered flip-flop clocked by dco_clk)
+  Path Group: dco_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  openMSP430         35000                 saed32rvt_ss0p75v125c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock dco_clk (rise edge)                             0.0000     0.0000
+  clock network delay (ideal)                           0.0000     0.0000
+  frontend_0/e_state_reg[1]/CLK (DFFARX2_LVT)           0.0000     0.0000 r
+  frontend_0/e_state_reg[1]/QN (DFFARX2_LVT)            0.1520     0.1520 r
+  U11816/Y (INVX2_LVT)                                  0.0138     0.1658 f
+  U11782/Y (OR2X1_LVT)                                  0.0619     0.2277 f
+  U13417/Y (OR2X2_LVT)                                  0.0741     0.3018 f
+  U11751/Y (INVX2_LVT)                                  0.0342     0.3359 r
+  U10154/Y (OR2X1_LVT)                                  0.0649     0.4008 r
+  U10146/Y (INVX1_LVT)                                  0.0229     0.4237 f
+  U11477/Y (AO22X1_LVT)                                 0.0844     0.5081 f
+  U10132/Y (INVX1_LVT)                                  0.0427     0.5508 r
+  U12031/Y (NBUFFX2_LVT)                                0.0672     0.6180 r
+  U10617/Y (OR2X1_HVT)                                  0.4167     1.0347 r
+  U11282/Y (NAND4X0_LVT)                                0.0376     1.0723 f
+  U10816/Y (OR4X1_LVT)                                  0.1942     1.2665 f
+  U13334/Y (AO21X1_LVT)                                 0.0954     1.3618 f
+  U11030/Y (INVX0_RVT)                                  0.0584     1.4203 r
+  U12723/Y (AO22X1_LVT)                                 0.1038     1.5240 r
+  U12717/Y (INVX2_LVT)                                  0.0233     1.5474 f
+  U10527/Y (NOR2X1_LVT)                                 0.0895     1.6368 r
+  U13451/Y (OR3X1_LVT)                                  0.0921     1.7289 r
+  U9921/Y (INVX2_LVT)                                   0.0181     1.7470 f
+  U14037/Y (XNOR2X2_LVT)                                0.1149     1.8619 r
+  U9976/Y (INVX1_LVT)                                   0.0179     1.8799 f
+  U14041/Y (AND2X1_LVT)                                 0.0659     1.9458 f
+  U13015/Y (AND2X1_LVT)                                 0.0659     2.0117 f
+  U13476/Y (OR2X2_LVT)                                  0.0753     2.0870 f
+  U11174/Y (INVX4_LVT)                                  0.0452     2.1322 r
+  U11823/Y (INVX4_LVT)                                  0.0266     2.1588 f
+  U9895/Y (INVX4_LVT)                                   0.0395     2.1983 r
+  U9864/Y (MUX21X1_LVT)                                 0.1226     2.3209 f
+  U14920/Y (INVX0_LVT)                                  0.0553     2.3762 r
+  U9842/Y (OR4X1_LVT)                                   0.1397     2.5159 r
+  U13805/Y (OR3X1_LVT)                                  0.0728     2.5887 r
+  U13804/Y (AO22X2_LVT)                                 0.1201     2.7088 r
+  U13024/Y (NOR2X0_HVT)                                 0.6799     3.3888 f
+  watchdog_0/wdtcnt_reg[3]/D (DFFARX1_RVT)              0.0000     3.3888 f
+  data arrival time                                                3.3888
+
+  clock dco_clk (rise edge)                             3.6000     3.6000
+  clock network delay (ideal)                           0.0000     3.6000
+  watchdog_0/wdtcnt_reg[3]/CLK (DFFARX1_RVT)            0.0000     3.6000 r
+  library setup time                                   -0.2109     3.3891
+  data required time                                               3.3891
+  --------------------------------------------------------------------------
+  data required time                                               3.3891
+  data arrival time                                               -3.3888
+  --------------------------------------------------------------------------
+  slack (MET)                                                      0.0003
+
+
+  Startpoint: frontend_0/e_state_reg[1]
+              (rising edge-triggered flip-flop clocked by dco_clk)
+  Endpoint: watchdog_0/wdtcnt_reg[4]
+            (rising edge-triggered flip-flop clocked by dco_clk)
+  Path Group: dco_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  openMSP430         35000                 saed32rvt_ss0p75v125c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock dco_clk (rise edge)                             0.0000     0.0000
+  clock network delay (ideal)                           0.0000     0.0000
+  frontend_0/e_state_reg[1]/CLK (DFFARX2_LVT)           0.0000     0.0000 r
+  frontend_0/e_state_reg[1]/QN (DFFARX2_LVT)            0.1520     0.1520 r
+  U11816/Y (INVX2_LVT)                                  0.0138     0.1658 f
+  U11782/Y (OR2X1_LVT)                                  0.0619     0.2277 f
+  U13417/Y (OR2X2_LVT)                                  0.0741     0.3018 f
+  U11751/Y (INVX2_LVT)                                  0.0342     0.3359 r
+  U10154/Y (OR2X1_LVT)                                  0.0649     0.4008 r
+  U10146/Y (INVX1_LVT)                                  0.0229     0.4237 f
+  U11477/Y (AO22X1_LVT)                                 0.0844     0.5081 f
+  U10132/Y (INVX1_LVT)                                  0.0427     0.5508 r
+  U12031/Y (NBUFFX2_LVT)                                0.0672     0.6180 r
+  U10617/Y (OR2X1_HVT)                                  0.4167     1.0347 r
+  U11282/Y (NAND4X0_LVT)                                0.0376     1.0723 f
+  U10816/Y (OR4X1_LVT)                                  0.1942     1.2665 f
+  U13334/Y (AO21X1_LVT)                                 0.0954     1.3618 f
+  U11030/Y (INVX0_RVT)                                  0.0584     1.4203 r
+  U12723/Y (AO22X1_LVT)                                 0.1038     1.5240 r
+  U12717/Y (INVX2_LVT)                                  0.0233     1.5474 f
+  U10527/Y (NOR2X1_LVT)                                 0.0895     1.6368 r
+  U13451/Y (OR3X1_LVT)                                  0.0921     1.7289 r
+  U9921/Y (INVX2_LVT)                                   0.0181     1.7470 f
+  U14037/Y (XNOR2X2_LVT)                                0.1149     1.8619 r
+  U9976/Y (INVX1_LVT)                                   0.0179     1.8799 f
+  U14041/Y (AND2X1_LVT)                                 0.0659     1.9458 f
+  U13015/Y (AND2X1_LVT)                                 0.0659     2.0117 f
+  U13476/Y (OR2X2_LVT)                                  0.0753     2.0870 f
+  U11174/Y (INVX4_LVT)                                  0.0452     2.1322 r
+  U11823/Y (INVX4_LVT)                                  0.0266     2.1588 f
+  U9895/Y (INVX4_LVT)                                   0.0395     2.1983 r
+  U9864/Y (MUX21X1_LVT)                                 0.1226     2.3209 f
+  U14920/Y (INVX0_LVT)                                  0.0553     2.3762 r
+  U9842/Y (OR4X1_LVT)                                   0.1397     2.5159 r
+  U13805/Y (OR3X1_LVT)                                  0.0728     2.5887 r
+  U13804/Y (AO22X2_LVT)                                 0.1201     2.7088 r
+  U13025/Y (NOR2X0_HVT)                                 0.6799     3.3888 f
+  watchdog_0/wdtcnt_reg[4]/D (DFFARX1_RVT)              0.0000     3.3888 f
+  data arrival time                                                3.3888
+
+  clock dco_clk (rise edge)                             3.6000     3.6000
+  clock network delay (ideal)                           0.0000     3.6000
+  watchdog_0/wdtcnt_reg[4]/CLK (DFFARX1_RVT)            0.0000     3.6000 r
+  library setup time                                   -0.2109     3.3891
+  data required time                                               3.3891
+  --------------------------------------------------------------------------
+  data required time                                               3.3891
+  data arrival time                                               -3.3888
+  --------------------------------------------------------------------------
+  slack (MET)                                                      0.0003
+
+
+  Startpoint: frontend_0/e_state_reg[1]
+              (rising edge-triggered flip-flop clocked by dco_clk)
+  Endpoint: watchdog_0/wdtcnt_reg[9]
+            (rising edge-triggered flip-flop clocked by dco_clk)
+  Path Group: dco_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  openMSP430         35000                 saed32rvt_ss0p75v125c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock dco_clk (rise edge)                             0.0000     0.0000
+  clock network delay (ideal)                           0.0000     0.0000
+  frontend_0/e_state_reg[1]/CLK (DFFARX2_LVT)           0.0000     0.0000 r
+  frontend_0/e_state_reg[1]/QN (DFFARX2_LVT)            0.1520     0.1520 r
+  U11816/Y (INVX2_LVT)                                  0.0138     0.1658 f
+  U11782/Y (OR2X1_LVT)                                  0.0619     0.2277 f
+  U13417/Y (OR2X2_LVT)                                  0.0741     0.3018 f
+  U11751/Y (INVX2_LVT)                                  0.0342     0.3359 r
+  U10154/Y (OR2X1_LVT)                                  0.0649     0.4008 r
+  U10146/Y (INVX1_LVT)                                  0.0229     0.4237 f
+  U11477/Y (AO22X1_LVT)                                 0.0844     0.5081 f
+  U10132/Y (INVX1_LVT)                                  0.0427     0.5508 r
+  U12031/Y (NBUFFX2_LVT)                                0.0672     0.6180 r
+  U10617/Y (OR2X1_HVT)                                  0.4167     1.0347 r
+  U11282/Y (NAND4X0_LVT)                                0.0376     1.0723 f
+  U10816/Y (OR4X1_LVT)                                  0.1942     1.2665 f
+  U13334/Y (AO21X1_LVT)                                 0.0954     1.3618 f
+  U11030/Y (INVX0_RVT)                                  0.0584     1.4203 r
+  U12723/Y (AO22X1_LVT)                                 0.1038     1.5240 r
+  U12717/Y (INVX2_LVT)                                  0.0233     1.5474 f
+  U10527/Y (NOR2X1_LVT)                                 0.0895     1.6368 r
+  U13451/Y (OR3X1_LVT)                                  0.0921     1.7289 r
+  U9921/Y (INVX2_LVT)                                   0.0181     1.7470 f
+  U14037/Y (XNOR2X2_LVT)                                0.1149     1.8619 r
+  U9976/Y (INVX1_LVT)                                   0.0179     1.8799 f
+  U14041/Y (AND2X1_LVT)                                 0.0659     1.9458 f
+  U13015/Y (AND2X1_LVT)                                 0.0659     2.0117 f
+  U13476/Y (OR2X2_LVT)                                  0.0753     2.0870 f
+  U11174/Y (INVX4_LVT)                                  0.0452     2.1322 r
+  U11823/Y (INVX4_LVT)                                  0.0266     2.1588 f
+  U9895/Y (INVX4_LVT)                                   0.0395     2.1983 r
+  U9864/Y (MUX21X1_LVT)                                 0.1226     2.3209 f
+  U14920/Y (INVX0_LVT)                                  0.0553     2.3762 r
+  U9842/Y (OR4X1_LVT)                                   0.1397     2.5159 r
+  U13805/Y (OR3X1_LVT)                                  0.0728     2.5887 r
+  U13804/Y (AO22X2_LVT)                                 0.1201     2.7088 r
+  U13027/Y (NOR2X0_HVT)                                 0.6799     3.3888 f
+  watchdog_0/wdtcnt_reg[9]/D (DFFARX1_RVT)              0.0000     3.3888 f
+  data arrival time                                                3.3888
+
+  clock dco_clk (rise edge)                             3.6000     3.6000
+  clock network delay (ideal)                           0.0000     3.6000
+  watchdog_0/wdtcnt_reg[9]/CLK (DFFARX1_RVT)            0.0000     3.6000 r
+  library setup time                                   -0.2109     3.3891
+  data required time                                               3.3891
+  --------------------------------------------------------------------------
+  data required time                                               3.3891
+  data arrival time                                               -3.3888
+  --------------------------------------------------------------------------
+  slack (MET)                                                      0.0003
+
+
+  Startpoint: frontend_0/e_state_reg[1]
+              (rising edge-triggered flip-flop clocked by dco_clk)
+  Endpoint: watchdog_0/wdtcnt_reg[13]
+            (rising edge-triggered flip-flop clocked by dco_clk)
+  Path Group: dco_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  openMSP430         35000                 saed32rvt_ss0p75v125c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock dco_clk (rise edge)                             0.0000     0.0000
+  clock network delay (ideal)                           0.0000     0.0000
+  frontend_0/e_state_reg[1]/CLK (DFFARX2_LVT)           0.0000     0.0000 r
+  frontend_0/e_state_reg[1]/QN (DFFARX2_LVT)            0.1520     0.1520 r
+  U11816/Y (INVX2_LVT)                                  0.0138     0.1658 f
+  U11782/Y (OR2X1_LVT)                                  0.0619     0.2277 f
+  U13417/Y (OR2X2_LVT)                                  0.0741     0.3018 f
+  U11751/Y (INVX2_LVT)                                  0.0342     0.3359 r
+  U10154/Y (OR2X1_LVT)                                  0.0649     0.4008 r
+  U10146/Y (INVX1_LVT)                                  0.0229     0.4237 f
+  U11477/Y (AO22X1_LVT)                                 0.0844     0.5081 f
+  U10132/Y (INVX1_LVT)                                  0.0427     0.5508 r
+  U12031/Y (NBUFFX2_LVT)                                0.0672     0.6180 r
+  U10617/Y (OR2X1_HVT)                                  0.4167     1.0347 r
+  U11282/Y (NAND4X0_LVT)                                0.0376     1.0723 f
+  U10816/Y (OR4X1_LVT)                                  0.1942     1.2665 f
+  U13334/Y (AO21X1_LVT)                                 0.0954     1.3618 f
+  U11030/Y (INVX0_RVT)                                  0.0584     1.4203 r
+  U12723/Y (AO22X1_LVT)                                 0.1038     1.5240 r
+  U12717/Y (INVX2_LVT)                                  0.0233     1.5474 f
+  U10527/Y (NOR2X1_LVT)                                 0.0895     1.6368 r
+  U13451/Y (OR3X1_LVT)                                  0.0921     1.7289 r
+  U9921/Y (INVX2_LVT)                                   0.0181     1.7470 f
+  U14037/Y (XNOR2X2_LVT)                                0.1149     1.8619 r
+  U9976/Y (INVX1_LVT)                                   0.0179     1.8799 f
+  U14041/Y (AND2X1_LVT)                                 0.0659     1.9458 f
+  U13015/Y (AND2X1_LVT)                                 0.0659     2.0117 f
+  U13476/Y (OR2X2_LVT)                                  0.0753     2.0870 f
+  U11174/Y (INVX4_LVT)                                  0.0452     2.1322 r
+  U11823/Y (INVX4_LVT)                                  0.0266     2.1588 f
+  U9895/Y (INVX4_LVT)                                   0.0395     2.1983 r
+  U9864/Y (MUX21X1_LVT)                                 0.1226     2.3209 f
+  U14920/Y (INVX0_LVT)                                  0.0553     2.3762 r
+  U9842/Y (OR4X1_LVT)                                   0.1397     2.5159 r
+  U13805/Y (OR3X1_LVT)                                  0.0728     2.5887 r
+  U13804/Y (AO22X2_LVT)                                 0.1201     2.7088 r
+  U15308/Y (NOR2X0_HVT)                                 0.6799     3.3888 f
+  watchdog_0/wdtcnt_reg[13]/D (DFFARX1_RVT)             0.0000     3.3888 f
+  data arrival time                                                3.3888
+
+  clock dco_clk (rise edge)                             3.6000     3.6000
+  clock network delay (ideal)                           0.0000     3.6000
+  watchdog_0/wdtcnt_reg[13]/CLK (DFFARX1_RVT)           0.0000     3.6000 r
+  library setup time                                   -0.2109     3.3891
+  data required time                                               3.3891
+  --------------------------------------------------------------------------
+  data required time                                               3.3891
+  data arrival time                                               -3.3888
+  --------------------------------------------------------------------------
+  slack (MET)                                                      0.0003
+
+
+1

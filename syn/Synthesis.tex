@@ -1,0 +1,195 @@
+\section{Synthesis}
+
+\subsection{Main functionality of the synthesis script}
+% 中文翻译：综合脚本的主要功能。
+
+The synthesis flow is driven by two Tcl scripts under
+\texttt{midterm-team-5/syn/}: \texttt{run\_syn.tcl} performs a single
+baseline synthesis at a relaxed clock period; \texttt{run\_syn\_sweep.tcl}
+performs a clock-period sweep to determine the maximum frequency at the
+worst-case corner and produces the final reports at that frequency.
+A third Tcl script, \texttt{midterm-team-5/ptpx/run\_ptpx.tcl}, runs the
+PrimeTime PX power analysis on the gate-level netlist at $F_\mathrm{max}$.
+% 中文翻译：综合流程由两份位于 midterm-team-5/syn/ 下的 Tcl 脚本驱动：run_syn.tcl 在较宽松的时钟周期上做一次基线综合；run_syn_sweep.tcl 做时钟周期扫频，在最差工艺角下确定最大频率，并在该频率上产出最终报告。另有一份脚本 midterm-team-5/ptpx/run_ptpx.tcl，在 Fmax 的门级网表上运行 PrimeTime PX 功耗分析。
+
+Both synthesis scripts share the same setup: \texttt{search\_path} is
+extended to include the RTL directories and the SAED32
+\texttt{db\_nldm} subdirectories; \texttt{target\_library} is set to the
+three worst-case \texttt{.db} files
+\texttt{saed32rvt\_ss0p75v125c.db},
+\texttt{saed32lvt\_ss0p75v125c.db}, and
+\texttt{saed32hvt\_ss0p75v125c.db} so DC may mix-and-match RVT, LVT and
+HVT cells; \texttt{link\_library} = \texttt{"* \$target\_library"};
+\texttt{WORK} is created under \texttt{./WORK}; all RTL under
+\texttt{../rtl/} (with \texttt{openMSP430\_defines.v} and
+\texttt{openMSP430\_undefines.v} excluded so they are pulled in through
+\verb|`include| only) plus \texttt{../rtl/periph/} are analyzed,
+elaborated, and linked at \texttt{openMSP430} as the top design.
+The clock constraint is placed on the on-chip oscillator input
+(\texttt{create\_clock -period \$p -name dco\_clk
+[get\_ports dco\_clk]}); the design's only sequential domain hangs off
+\texttt{dco\_clk}. \texttt{set\_fix\_multiple\_port\_nets -all
+-buffer\_constants} is applied before compilation.
+% 中文翻译：两份综合脚本共享同一套设置：把 RTL 目录与 SAED32 db_nldm 子目录加入 search_path；将 target_library 设置为三个最差工艺角 .db 文件 saed32rvt_ss0p75v125c.db、saed32lvt_ss0p75v125c.db、saed32hvt_ss0p75v125c.db，DC 可在 RVT/LVT/HVT 三种单元间自由混搭；link_library = "* \$target_library"；WORK 库放在 ./WORK；analyze ../rtl/ 下除 openMSP430_defines.v 与 openMSP430_undefines.v（这两份通过 \`include 引入）外的所有 RTL 以及 ../rtl/periph/，elaborate 并 link 顶层 openMSP430；时钟约束加在片内振荡器输入端口上（create_clock -period \$p -name dco_clk [get_ports dco_clk]），设计中唯一的时序域由 dco_clk 驱动；compile 之前还调用 set_fix_multiple_port_nets -all -buffer_constants。
+
+After compilation, \texttt{run\_syn.tcl} writes the baseline reports
+\texttt{reports/timing.rpt}, \texttt{reports/area.rpt},
+\texttt{reports/power.rpt}, and the artifacts \texttt{netlist.v},
+\texttt{constraints.sdc}, \texttt{netlist.sdf}.
+\texttt{run\_syn\_sweep.tcl} writes the corresponding final-frequency
+artifacts \texttt{netlist\_maxfreq.v}, \texttt{constraints\_maxfreq.sdc},
+\texttt{netlist\_maxfreq.sdf} and the reports
+\texttt{reports/timing\_maxfreq.rpt},
+\texttt{reports/area\_maxfreq.rpt},
+\texttt{reports/power\_maxfreq.rpt}.
+% 中文翻译：编译之后，run_syn.tcl 写出基线报告 reports/timing.rpt、reports/area.rpt、reports/power.rpt 与 netlist.v、constraints.sdc、netlist.sdf；run_syn_sweep.tcl 写出对应 Fmax 的网表 netlist_maxfreq.v、约束 constraints_maxfreq.sdc、SDF netlist_maxfreq.sdf，以及 reports/timing_maxfreq.rpt、reports/area_maxfreq.rpt、reports/power_maxfreq.rpt。
+
+\subsection{Synthesis methodology}
+% 中文翻译：综合方法学。
+
+A flat \emph{top-down} compile is used: the entire
+\texttt{openMSP430} hierarchy is analyzed, elaborated and compiled
+together so DC has global visibility of every register-to-register
+path. The compile command itself is \texttt{compile\_ultra -gate\_clock}
+(global view, integrated clock-gating insertion enabled). After
+\texttt{run\_syn\_sweep.tcl} locates the maximum frequency by sweeping
+the clock period, a final \texttt{compile\_ultra -gate\_clock
+-incremental} pass is run at the chosen period; the incremental compile
+preserves the structure produced by the prior global compile and only
+re-optimizes paths that need it, so the saved netlist matches the
+slack figure recorded for that period.
+% 中文翻译：采用扁平的 \emph{top-down}（自顶向下）综合：先把整个 openMSP430 层次一起 analyze、elaborate、compile，让 DC 对所有 register-to-register 路径有全局视野。compile 命令本身是 compile_ultra -gate_clock（全局视野 + 启用集成时钟门控插入）。run_syn_sweep.tcl 通过扫频确定最大频率后，再在选定的周期上跑一次 compile_ultra -gate_clock -incremental 收尾——增量 compile 保留前一次全局 compile 产生的结构，只对需要的路径再优化，因此保存下来的网表与该周期记录的 slack 严格对应。
+
+The three libraries are loaded jointly so the optimizer can mix RVT,
+LVT and HVT cells. The cell-by-cell expansion of the worst path in
+\texttt{syn/reports/timing\_maxfreq.rpt} (lines~30--69) shows a mix of
+LVT, RVT, and HVT cells along the path.
+% 中文翻译：三套阈值库同时装载，让优化器可以混用 RVT/LVT/HVT 单元。syn/reports/timing_maxfreq.rpt 第 30--69 行展开的关键路径逐 cell 列表里同时出现了 LVT、RVT 与 HVT 三种单元。
+
+\subsection{How the maximum frequency was determined}
+% 中文翻译：最大频率的确定方式。
+
+The maximum frequency is defined as the highest clock frequency at
+which the design meets all setup constraints under the chosen
+worst-case PVT corner. The sweep script searches for it
+empirically. Starting from the largest period in a candidate list, the
+script removes the existing clock, creates a new \texttt{dco\_clk} at
+the trial period, runs a fresh \texttt{compile\_ultra -gate\_clock},
+queries the worst-path slack via
+\texttt{get\_attribute [get\_timing\_paths -max\_paths 1 -delay max] slack},
+and prints a \texttt{SWEEP:} line. As long as the worst slack stays
+non-negative the period is recorded as the running \texttt{best\_period};
+on the first negative-slack iteration the script prints
+\texttt{SWEEP: negative slack \dots\ stop} and breaks. The
+\emph{last period with non-negative worst slack} observed in the sweep
+is reported as the maximum frequency: positive slack at this period
+implies positive slack at any larger period as well, while at the next
+tighter period the same compile produced negative slack.
+% 中文翻译：最大频率定义为设计在所选最差 PVT 工艺角下仍能满足所有 setup 约束的最高时钟频率。扫频脚本通过实验方式找出这个频率：从候选周期列表中最大的周期开始，先清除已有时钟，按当前候选周期重新 create_clock dco_clk，跑一次 compile_ultra -gate_clock，用 get_attribute [get_timing_paths -max_paths 1 -delay max] slack 取出最差路径的 slack，并打印一行 SWEEP:；只要最差 slack 仍非负就把该周期记为 best_period；第一次出现负 slack 时打印 SWEEP: negative slack ... stop 并 break。本次扫频中观察到的最后一个仍保持非负 slack 的周期被记作最大频率：在该周期下 slack 为正，意味着在更大的周期下也必然为正；而在再紧一个的周期上同一份 compile 产生了负 slack。
+
+The sweep was run twice. A coarse pass swept periods from $10$\,ns
+down to $4$\,ns and confirmed that all of these close. A fine pass
+extended the sweep below $4$\,ns and located the closure edge.
+Table~\ref{tab:syn_sweep} summarizes both passes.
+% 中文翻译：扫频一共跑了两轮。粗扫从 10 ns 走到 4 ns，确认这一段所有周期都能关时序；细扫继续往 4 ns 以下走，找到闭合边界。表~\ref{tab:syn_sweep} 汇总了两轮扫频的结果。
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|r|r|c|}
+\hline
+\textbf{Period (ns)} & \textbf{Worst slack (ns)} & \textbf{Closes?} \\ \hline
+10.0 & +0.05752 & yes \\ \hline
+ 9.0 & +0.04046 & yes \\ \hline
+ 8.0 & +0.00123 & yes \\ \hline
+ 7.0 & +0.00211 & yes \\ \hline
+ 6.0 & +0.00166 & yes \\ \hline
+ 5.0 & +0.00156 & yes \\ \hline
+ 4.6 & +0.00025 & yes \\ \hline
+ 4.2 & +0.00007 & yes \\ \hline
+ 4.0 & +0.00064 & yes \\ \hline
+\textbf{3.6} & \textbf{+0.000272} & \textbf{yes ($F_\mathrm{max}$)} \\ \hline
+ 3.2 & $-$0.00770 & no --- stop \\ \hline
+\end{tabular}
+\caption{Clock-period sweep at SS/0.75\,V/125\,$^\circ$C.
+The smallest period with non-negative slack is $T=3.6$\,ns; at
+$T=3.2$\,ns the worst path falls $\sim$7.7\,ps short, so
+$F_\mathrm{max}=1000/3.6=277.78$\,MHz.
+Coarse-pass values are taken from \texttt{syn/syn\_sweep\_v1.log};
+fine-pass values are taken from
+\texttt{syn/syn\_sweep.log:934, :1308, :1687}; the final summary line
+is \texttt{syn/syn\_sweep.log:1969}
+``\texttt{FINAL: best\_period=3.6ns, Fmax=277.777777778MHz,
+slack=0.000271797}''.}
+\label{tab:syn_sweep}
+\end{table}
+
+\subsection{Final frequency, area, slack at the critical path, and power}
+% 中文翻译：最终频率、面积、关键路径 slack 与功耗。
+
+\paragraph{Maximum frequency.}
+$F_\mathrm{max}=277.78$\,MHz at $T_\mathrm{period}=3.6$\,ns
+(\texttt{syn/syn\_sweep.log:1969};
+\texttt{syn/constraints\_maxfreq.sdc:9}).
+% 中文翻译：最大频率 Fmax = 277.78 MHz @ T = 3.6 ns（来源 syn/syn_sweep.log:1969 与 syn/constraints_maxfreq.sdc:9）。
+
+\paragraph{Final area at $F_\mathrm{max}$.}
+Total cell area $=18{,}930.93\,\mu\mathrm{m}^2 \approx 0.0189\,\mathrm{mm}^2$
+(\texttt{syn/reports/area\_maxfreq.rpt:30}).
+The breakdown read from the same report is: combinational
+$13{,}755.54\,\mu\mathrm{m}^2$ (\texttt{:24}); buf/inv
+$2{,}140.15\,\mu\mathrm{m}^2$ (\texttt{:25}); non-combinational
+$5{,}175.39\,\mu\mathrm{m}^2$ (\texttt{:26}); estimated
+net interconnect $4{,}851.72\,\mu\mathrm{m}^2$ (\texttt{:28}). Cell counts:
+total $7{,}013$; combinational $6{,}184$; sequential $730$;
+buf/inv $1{,}592$; references $186$; nets $7{,}628$; ports $444$
+(\texttt{:15--:22}).
+% 中文翻译：Fmax 上的最终面积——总 cell 面积 = 18,930.93 µm² ≈ 0.0189 mm²（来源 syn/reports/area_maxfreq.rpt:30）；分项来自同一份报告：组合 13,755.54 µm²（:24）、buf/inv 2,140.15 µm²（:25）、非组合 5,175.39 µm²（:26）、估计的 net interconnect 4,851.72 µm²（:28）。Cell 数：总 7013、组合 6184、时序 730、buf/inv 1592、引用 186 种、nets 7628、端口 444（:15--:22）。
+
+\paragraph{Timing slack on the critical path at $F_\mathrm{max}$.}
+At $T=3.6$\,ns the worst-path slack is $+0.000272$\,ns, recorded as
+\texttt{(MET) 0.0002} in the sign-off timing report. The path runs
+from \texttt{frontend\_0/e\_state\_reg[0]/QN} to
+\texttt{mem\_backbone\_0/per\_dout\_val\_reg[9]/D}, with data arrival
+$3.5409$\,ns, library setup time $-0.0589$\,ns, and required time
+$3.5411$\,ns; the difference $3.5411-3.5409=+0.0002$\,ns is the slack
+quoted above. Sources:
+\texttt{syn/syn\_sweep.log:1308} for the sweep value;
+\texttt{syn/reports/timing\_maxfreq.rpt:16} (Startpoint),
+\texttt{:18} (Endpoint), \texttt{:69} (data arrival),
+\texttt{:75--76} (setup and required time), \texttt{:81}
+(\texttt{slack (MET) 0.0002}).
+% 中文翻译：Fmax 上的关键路径 slack ——在 T = 3.6 ns 下最差路径 slack 为 +0.000272 ns，sign-off timing 报告中记为 (MET) 0.0002。该路径从 frontend_0/e_state_reg[0]/QN 走到 mem_backbone_0/per_dout_val_reg[9]/D，data arrival 3.5409 ns、library setup -0.0589 ns、required time 3.5411 ns；3.5411 - 3.5409 = +0.0002 ns 即上述 slack。证据：扫频值来自 syn/syn_sweep.log:1308；起点、终点、data arrival、setup/required、slack 分别来自 syn/reports/timing_maxfreq.rpt 第 16/18/69/75-76/81 行。
+
+\paragraph{Power at $F_\mathrm{max}$ (PrimeTime PX, VCD-driven).}
+PrimeTime PX is run on the gate-level netlist
+\texttt{../syn/netlist\_maxfreq.v} with
+\texttt{../syn/constraints\_maxfreq.sdc} as the SDC and
+\texttt{../syn/netlist\_maxfreq.sdf} back-annotated for cell delays.
+Switching activity is taken from a real netlist simulation rather than
+from a uniform default: VCS replays \texttt{pmem\_t00.mem}
+(\texttt{TEST\_ID=0}, the baseline workload that holds the watchdog
+and exercises the multiplier with a constrained-random IRQ pulse) on
+\texttt{simv\_netlist} for $50{,}000$ \texttt{mclk} cycles with the
+testbench's \verb|+VCD_DUMP=ptpx_t00.vcd| switch enabled, producing
+\texttt{sim/ptpx\_t00.vcd}. \texttt{run\_ptpx.tcl} then loads the VCD
+through its \texttt{USE\_VCD=1} branch
+(\texttt{read\_vcd -strip\_path tb\_openmsp430\_minimal/dut
+../sim/ptpx\_t00.vcd}); \texttt{update\_power} propagates the recorded
+toggle activity through the netlist before \texttt{report\_power} is
+written.
+
+The total reported power is $1.226$\,mW, broken into cell internal
+$0.0147$\,mW ($1.20\%$), net switching $0.00143$\,mW ($0.12\%$), and
+cell leakage $1.210$\,mW ($98.69\%$); by power group, combinational
+logic accounts for $0.807$\,mW ($65.81\%$), registers for $0.401$\,mW
+($32.67\%$), and the clock network for $0.0187$\,mW ($1.53\%$). All
+values are read from \texttt{ptpx/reports/power.rpt} (Total at
+\texttt{:30}; Cell Internal \texttt{:27}; Net Switching \texttt{:26};
+Cell Leakage \texttt{:28}; combinational group \texttt{:20};
+register group \texttt{:19}; clock-network group \texttt{:18}). The
+report header line \texttt{Report : Averaged Power} (\texttt{:2})
+confirms PrimeTime PX averaged-mode power analysis. Leakage dominates
+because the workload is mostly NOP padding around a small number of
+peripheral-store instructions, so dynamic activity outside those writes
+is very low.
+% 中文翻译：Fmax 上的功耗（PrimeTime PX，VCD 驱动）——PrimeTime PX 在门级网表 ../syn/netlist_maxfreq.v 上运行，SDC 为 ../syn/constraints_maxfreq.sdc，cell 延迟由 ../syn/netlist_maxfreq.sdf 反标。翻转活动不再使用统一的默认翻转率，而是来自真实的门级仿真：VCS 在 simv_netlist 上以 +VCD_DUMP=ptpx_t00.vcd 把 pmem_t00.mem（TEST_ID=0，基线 workload：关看门狗、写乘法器并由约束随机 IRQ 触发一次中断）跑了 50000 个 mclk 周期，生成 sim/ptpx_t00.vcd；run_ptpx.tcl 通过其 USE_VCD=1 分支用 read_vcd -strip_path tb_openmsp430_minimal/dut ../sim/ptpx_t00.vcd 读入该 VCD，再由 update_power 把记录的翻转活动传播到网表，最后 report_power 写入报告。总功耗 1.226 mW，其中 cell internal 0.0147 mW（1.20\%）、net switching 0.00143 mW（0.12\%）、cell leakage 1.210 mW（98.69\%）；按 power group 划分，组合逻辑 0.807 mW（65.81\%）、寄存器 0.401 mW（32.67\%）、时钟网络 0.0187 mW（1.53\%）。所有数值来自 ptpx/reports/power.rpt：总功耗 :30；Cell Internal :27；Net Switching :26；Cell Leakage :28；组合 :20；寄存器 :19；时钟网络 :18。报告头部第 2 行 Report : Averaged Power 表明使用的是 PrimeTime PX 的 averaged-mode 功耗分析。漏电占比之所以高，是因为 workload 主要由 NOP 填充加上少量外设写指令组成，在写操作之外的动态活动非常低。

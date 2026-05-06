@@ -1,0 +1,190 @@
+Error: Library Compiler executable path is not set. (PT-063)
+
+                                 PrimeTime (R)
+
+              Version V-2023.12-SP5-4 for linux64 - Aug 07, 2025 
+
+                    Copyright (c) 1988 - 2025 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+# CS220 Midterm — PrimeTime PX power analysis at Fmax
+#
+# Usage:
+#   cd ptpx
+#   export SAED32_HOME=/usr/local/synopsys/pdk/SAED32_EDK
+#   pt_shell -f run_ptpx.tcl | tee ptpx.log
+#
+# Inputs (from ../syn/):
+#   netlist_maxfreq.v        — gate-level netlist at Fmax
+#   constraints_maxfreq.sdc  — clock @ Fmax
+#   netlist_maxfreq.sdf      — back-annotated cell delays (optional, used if present)
+#
+# Optional activity input:
+#   ../sim/ptpx_t00.vcd      — VCD from a netlist sim of TEST_ID=0
+#                              (set USE_VCD env var to enable; otherwise PrimeTime
+#                               assigns a default 10% toggle rate via set_switching_activity)
+#
+# Outputs (under reports/):
+#   power.rpt        — total / dynamic / leakage breakdown
+#   power_group.rpt  — by power group (clock_network, register, combinational, …)
+#   power_hier.rpt   — hierarchical
+#   timing_check.rpt — sanity sign-off timing report at Fmax
+set search_path [list .]
+.
+if {[info exists env(SAED32_HOME)]} {
+  set saed $env(SAED32_HOME)
+  lappend search_path $saed $saed/lib
+  foreach corner {stdcell_rvt stdcell_lvt stdcell_hvt} {
+    set dbd [file join $saed lib $corner db_nldm]
+    if {[file isdirectory $dbd]} { lappend search_path $dbd }
+  }
+}
+set_app_var search_path $search_path
+. /usr/local/synopsys/pdk/SAED32_EDK /usr/local/synopsys/pdk/SAED32_EDK/lib /usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_rvt/db_nldm /usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_lvt/db_nldm /usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_hvt/db_nldm
+set_app_var link_path "* saed32rvt_ss0p75v125c.db saed32lvt_ss0p75v125c.db saed32hvt_ss0p75v125c.db"
+* saed32rvt_ss0p75v125c.db saed32lvt_ss0p75v125c.db saed32hvt_ss0p75v125c.db
+# Enable power analysis BEFORE link_design so PTPX-only commands
+# (set_switching_activity, propagate_switching_activity, report_power) are available.
+set_app_var power_enable_analysis true
+Information: Checked out license 'PrimePower' (PT-019)
+true
+set_app_var power_analysis_mode averaged
+averaged
+file mkdir reports
+# Read the post-synthesis Fmax netlist
+read_verilog ../syn/netlist_maxfreq.v
+1
+current_design openMSP430
+Information: current_design won't return any data before link (DES-071)
+link_design
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_rvt/db_nldm/saed32rvt_ss0p75v125c.db'
+Loading verilog file '/home/cegrad/xhuan230/cs220/midterm-team-5/syn/netlist_maxfreq.v'
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_lvt/db_nldm/saed32lvt_ss0p75v125c.db'
+Loading db file '/usr/local/synopsys/pdk/SAED32_EDK/lib/stdcell_hvt/db_nldm/saed32hvt_ss0p75v125c.db'
+Linking design openMSP430...
+Information: Removing 46 unneeded designs..... (LNK-034)
+Information: 242 (82.31%) library cells are unused in library saed32rvt_ss0p75v125c..... (LNK-045)
+Information: 238 (80.95%) library cells are unused in library saed32lvt_ss0p75v125c..... (LNK-045)
+Information: 261 (88.78%) library cells are unused in library saed32hvt_ss0p75v125c..... (LNK-045)
+Information: total 741 library cells are unused (LNK-046)
+Design 'openMSP430' was successfully linked.
+Information: There are 7221 leaf cells, ports, hiers and 7889 nets in the design (LNK-047)
+1
+# Worst-case operating conditions are the only ones characterized in these libs;
+# pt picks them automatically from the .db, no set_operating_conditions needed.
+# Constraints (clock at Fmax)
+read_sdc ../syn/constraints_maxfreq.sdc
+
+Reading SDC version 2.1...
+1
+1
+# Back-annotate cell delays if SDF is available (sign-off accuracy)
+if {[file exists ../syn/netlist_maxfreq.sdf]} {
+  read_sdf ../syn/netlist_maxfreq.sdf
+}
+
+****************************************
+Report : read_sdf /home/cegrad/xhuan230/cs220/midterm-team-5/syn/netlist_maxfreq.sdf
+	-load_delay cell
+	-analysis_type on_chip_variation
+	-min_type sdf_min
+	-max_type sdf_max
+Design : openMSP430
+Version: V-2023.12-SP5-4
+Date   : Wed May  6 10:27:30 2026
+****************************************
+
+        0 error(s)
+        Number of annotated cell delay arcs :     33982
+        Number of annotated net delay arcs  :     15908
+        Number of annotated timing checks   :      4364
+        Number of annotated constraints     :      2092
+        TEMPERATURE: 125.00 (min)  125.00 (max)
+        VOLTAGE    : 0.75 (min)  0.75 (max)
+        PROCESS    : ss0p75v125c (min)  ss0p75v125c (max)
+1
+# Update / sanity-check timing first
+update_timing -full
+Warning: Zero transition time will be used at to pins of annotated arcs. Delays on not annotated delay arcs will be estimated using best available slew.  (PTE-066)
+Information: Using automatic max wire load selection group 'predcaps'. (ENV-003)
+Information: Using automatic min wire load selection group 'predcaps'. (ENV-003)
+Warning: Some timing arcs have been disabled for breaking timing loops or because of constant propagation. Use the 'report_disable_timing' command to get the list of these disabled timing arcs. (PTE-003)
+Information: Building multi voltage information for entire design. (MV-022)
+Information: Zero transition time used at to pin of annotated arcs. Delays on not annotated delay arcs will be estimated using best available slew.  (PTE-054)
+Information: Zero transition time used at to pin of annotated arcs. Delays on not annotated delay arcs will be estimated using best available slew.  (PTE-054)
+1
+report_timing -max_paths 5 -significant_digits 4 > reports/timing_check.rpt
+# --- Power analysis -----------------------------------------------------------
+# Two activity sources are supported. VCD gives sign-off-accurate dynamic power;
+# default propagation gives a quick leakage-dominated estimate.
+set vcd_path "../sim/ptpx_t00.vcd"
+../sim/ptpx_t00.vcd
+set use_vcd 0
+0
+if {[info exists env(USE_VCD)] && $env(USE_VCD) ne "0" && [file exists $vcd_path]} {
+  set use_vcd 1
+}
+1
+if {$use_vcd} {
+  puts "PTPX: reading VCD activity from $vcd_path"
+  read_vcd -strip_path tb_openmsp430_minimal/dut $vcd_path
+} else {
+  puts "PTPX: no VCD — using default switching activity (10% toggle, 50% static prob.)"
+  set_switching_activity -toggle_rate 0.10 -static_probability 0.5       -base_clock dco_clk [all_inputs]
+  set_switching_activity -toggle_rate 0.10 -static_probability 0.5       [all_registers -data_pins]
+}
+PTPX: reading VCD activity from ../sim/ptpx_t00.vcd
+Information: Reading file ptpx_t00.vcd to annotate toggle rates on the design...
+Information: Reading vcd file '/home/cegrad/xhuan230/cs220/midterm-team-5/sim/ptpx_t00.vcd'
+Information: Simulation Start Time : 0.000000 ns, Simulation End Time : 2499975.000000 ns, Total Simulation Time : 2499975.000000 ns
+
+======================================================================
+Summary:
+Total number of nets = 7738
+Number of annotated nets = 1493 (19.29%)
+Total number of leaf cells = 6914
+Number of fully annotated leaf cells = 51 (0.74%)
+======================================================================
+
+Information: Total number of synthesis invariant points = 1218 , annotated synthesis invariant points = 503, annotation_ratio = 41.30%
+1
+# Modern PrimeTime PX uses update_power (not propagate_switching_activity);
+# it internally propagates activity through the design before report_power.
+update_power
+Information: Running switching activity propagation with 4 threads!
+Information: Running averaged power analysis... (PWR-601)
+Information: Running power calculation with 4 threads. (PWR-602)
+1
+# Comprehensive power reports
+report_power                                > reports/power.rpt
+report_power -groups {clock_network register combinational sequential io_pad memory black_box}                                             > reports/power_group.rpt
+report_power -hierarchy -levels 3           > reports/power_hier.rpt
+puts "DONE: ptpx reports in ptpx/reports/"
+DONE: ptpx reports in ptpx/reports/
+exit
+Information: Defining new variable 'dbd'. (CMD-041)
+Information: Defining new variable 'vcd_path'. (CMD-041)
+Information: Defining new variable 'use_vcd'. (CMD-041)
+Information: Defining new variable 'saed'. (CMD-041)
+Information: Defining new variable 'corner'. (CMD-041)
+
+Timing updates: 1 (0 implicit, 1 explicit) (0 incremental, 1 full, 0 logical)
+Noise updates: 0 (0 implicit, 0 explicit) (0 incremental, 0 full)
+Maximum memory usage for this session: 2552.54 MB
+CPU usage for this session: 11 seconds 
+Elapsed time for this session: 9 seconds
+Diagnostics summary: 1 error, 2 warnings, 20 informationals
+
+Thank you for using pt_shell!

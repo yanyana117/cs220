@@ -1,0 +1,32 @@
+****************************************
+Report : Averaged Power
+Design : openMSP430
+Version: V-2023.12-SP5-4
+Date   : Wed May  6 10:27:33 2026
+****************************************
+
+
+
+  Attributes
+  ----------
+      i  -  Including register clock pin internal power
+      u  -  User defined power group
+
+                        Internal  Switching  Leakage    Total
+Power Group             Power     Power      Power      Power   (     %)  Attrs
+--------------------------------------------------------------------------------
+clock_network           1.166e-05 2.937e-07 6.749e-06 1.871e-05 ( 1.53%)  i
+register                2.761e-07 6.636e-08 4.002e-04 4.006e-04 (32.67%)  
+combinational           2.750e-06 1.073e-06 8.031e-04 8.070e-04 (65.81%)  
+sequential                 0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+memory                     0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+io_pad                     0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+black_box                  0.0000    0.0000    0.0000    0.0000 ( 0.00%)  
+
+  Net Switching Power  = 1.433e-06   ( 0.12%)
+  Cell Internal Power  = 1.469e-05   ( 1.20%)
+  Cell Leakage Power   = 1.210e-03   (98.69%)
+                         ---------
+Total Power            = 1.226e-03  (100.00%)
+
+1

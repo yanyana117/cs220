@@ -180,6 +180,18 @@ module tb_openmsp430_minimal;
         $display("TB: TEST_ID=%0d (program memory loaded)", test_id);
     end
 
+    // Optional VCD dump for PrimeTime PX power analysis with representative
+    // test-vector activity. Triggered by +VCD_DUMP=<path>; with no plusarg
+    // nothing is dumped, so default sim behavior is unchanged.
+    reg [8*256-1:0] vcd_path;
+    initial begin
+        if ($value$plusargs("VCD_DUMP=%s", vcd_path)) begin
+            $dumpfile(vcd_path);
+            $dumpvars(0, dut);
+            $display("TB: VCD dump enabled -> %0s", vcd_path);
+        end
+    end
+
     initial begin
         dco_clk          = 1'b0;
         dco_local_enable = 1'b0;
