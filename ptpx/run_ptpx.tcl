@@ -11,9 +11,9 @@
 #   netlist_maxfreq.sdf      — back-annotated cell delays (optional, used if present)
 #
 # Optional activity input:
-#   ../sim/ptpx_t00.vcd      — VCD from a netlist sim of TEST_ID=0
-#                              (set USE_VCD env var to enable; otherwise PrimeTime
-#                               assigns a default 10% toggle rate via set_switching_activity)
+#   VCD_PATH env var          — override VCD path (default ../sim/ptpx_t00.vcd)
+#   USE_VCD env var           — enable VCD branch when non-zero and file exists
+#   OUT_TAG env var           — optional report suffix, e.g. _t09 / _t14
 #
 # Outputs (under reports/):
 #   power.rpt        — total / dynamic / leakage breakdown
@@ -40,6 +40,12 @@ set_app_var power_analysis_mode averaged
 
 file mkdir reports
 
+# Optional per-run suffix for report filenames (keeps multiple workloads)
+set out_tag ""
+if {[info exists env(OUT_TAG)] && $env(OUT_TAG) ne ""} {
+  set out_tag $env(OUT_TAG)
+}
+
 # Read the post-synthesis Fmax netlist
 read_verilog ../syn/netlist_maxfreq.v
 current_design openMSP430
@@ -58,12 +64,15 @@ if {[file exists ../syn/netlist_maxfreq.sdf]} {
 
 # Update / sanity-check timing first
 update_timing -full
-report_timing -max_paths 5 -significant_digits 4 > reports/timing_check.rpt
+report_timing -max_paths 5 -significant_digits 4 > [format "reports/timing_check%s.rpt" $out_tag]
 
 # --- Power analysis -----------------------------------------------------------
 # Two activity sources are supported. VCD gives sign-off-accurate dynamic power;
 # default propagation gives a quick leakage-dominated estimate.
 set vcd_path "../sim/ptpx_t00.vcd"
+if {[info exists env(VCD_PATH)] && $env(VCD_PATH) ne ""} {
+  set vcd_path $env(VCD_PATH)
+}
 set use_vcd 0
 if {[info exists env(USE_VCD)] && $env(USE_VCD) ne "0" && [file exists $vcd_path]} {
   set use_vcd 1
@@ -85,10 +94,10 @@ if {$use_vcd} {
 update_power
 
 # Comprehensive power reports
-report_power                                > reports/power.rpt
+report_power                                > [format "reports/power%s.rpt" $out_tag]
 report_power -groups {clock_network register combinational sequential io_pad memory black_box} \
-                                            > reports/power_group.rpt
-report_power -hierarchy -levels 3           > reports/power_hier.rpt
+                                            > [format "reports/power_group%s.rpt" $out_tag]
+report_power -hierarchy -levels 3           > [format "reports/power_hier%s.rpt" $out_tag]
 
 puts "DONE: ptpx reports in ptpx/reports/"
 exit
