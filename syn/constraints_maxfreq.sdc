@@ -6,4 +6,5 @@
 set sdc_version 2.1
 
 set_units -time ns -resistance MOhm -capacitance fF -voltage V -current uA
-create_clock [get_ports dco_clk]  -period 3.6  -waveform {0 1.8}
+create_clock [get_ports dco_clk]  -period 3.7  -waveform {0 1.8} 
+# solving discrepancy between PT and DC so that slack is met

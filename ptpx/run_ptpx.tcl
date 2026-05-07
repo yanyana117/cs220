@@ -64,8 +64,7 @@ if {[file exists ../syn/netlist_maxfreq.sdf]} {
 
 # Update / sanity-check timing first
 update_timing -full
-report_timing -max_paths 5 -significant_digits 4 > [format "reports/timing_check%s.rpt" $out_tag]
-
+report_timing -max_paths 5 -significant_digits 4 -slack_lesser_than 1.0 > [format "reports/timing_check%s.rpt" $out_tag]
 # --- Power analysis -----------------------------------------------------------
 # Two activity sources are supported. VCD gives sign-off-accurate dynamic power;
 # default propagation gives a quick leakage-dominated estimate.
